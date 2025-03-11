@@ -4,6 +4,9 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Ajouter les services pour les contrôleurs
+builder.Services.AddControllers();
+
 // Ajouter la connexion à la base de données
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
@@ -42,8 +45,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
-
+// Ajouter le middleware pour les contrôleurs
+app.UseRouting();
+app.UseAuthorization();
+app.MapControllers();
 
 // Lancer l'application
 app.Run();

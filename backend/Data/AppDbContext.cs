@@ -15,6 +15,20 @@ namespace backend.Data
         public DbSet<Commentaires> CommentaireDB { get; set; }
         public DbSet<Evaluations> EvaluationDB { get; set; }
         public DbSet<Chatbot> ChatbotDB { get; set; }
+   protected override void OnModelCreating(ModelBuilder modelBuilder)
+   {
+       // Mapper les tables
+
+       modelBuilder.Entity<Utilisateurs>().ToTable("Utilisateurs");
+       modelBuilder.Entity<Professionnels>().ToTable("Professionnels");
+       modelBuilder.Entity<Clients>().ToTable("Clients");
+       modelBuilder.Entity<Photos>().ToTable("Photos");
+       modelBuilder.Entity<Demandes>().ToTable("Demandes");
+        modelBuilder.Entity<Commentaires>().ToTable("Commentaires");
+         modelBuilder.Entity<Evaluations>().ToTable("Evaluations");
+                  modelBuilder.Entity<Chatbot>().ToTable("Chatbot");
+
+   }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

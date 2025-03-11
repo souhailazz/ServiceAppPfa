@@ -1,8 +1,11 @@
 using backend.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace backend.Models;
 
 public class Evaluations
 {
+    [Key]
     public int Id { get; set; } // Clé primaire
     public int ProfessionnelId { get; set; } // Clé étrangère vers Professionnels
     public int ClientId { get; set; } // Clé étrangère vers Clients

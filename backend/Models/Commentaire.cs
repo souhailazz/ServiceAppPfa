@@ -1,8 +1,11 @@
 using backend.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace backend.Models;
 
 public class Commentaires
 {
+    [Key]
     public int Id { get; set; } // Clé primaire
     public int DemandeId { get; set; } // Clé étrangère vers Demandes
     public int UtilisateurId { get; set; } // Clé étrangère vers Utilisateurs

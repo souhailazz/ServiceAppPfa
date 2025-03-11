@@ -1,8 +1,11 @@
 using backend.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace backend.Models;
 
 public class Photos
 {
+    [Key]
     public int Id { get; set; } // Clé primaire
     public string Url { get; set; }
     public int? ProfessionnelId { get; set; } // Clé étrangère vers Professionnels (nullable)
