@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Professionnels
 {
     public int Id { get; set; } // Clé primaire
@@ -8,5 +11,5 @@ public class Professionnels
     public string? Disponibilite { get; set; }
 
     
-    public Utilisateur Utilisateur { get; set; }
+    public Utilisateurs Utilisateur { get; set; }
 }

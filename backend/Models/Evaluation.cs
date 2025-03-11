@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Evaluations
 {
     public int Id { get; set; } // Clé primaire
@@ -8,6 +11,6 @@ public class Evaluations
     public DateTime DateEvaluation { get; set; } = DateTime.Now;
 
     // Relations
-    public Professionnel Professionnel { get; set; }
-    public Client Client { get; set; }
+    public Professionnels Professionnel { get; set; }
+    public Clients Client { get; set; }
 }

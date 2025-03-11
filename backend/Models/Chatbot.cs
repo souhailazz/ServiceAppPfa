@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Chatbot
 {
     public int Id { get; set; }
@@ -6,5 +9,5 @@ public class Chatbot
     public string? Reponse { get; set; }
     public DateTime DateInteraction { get; set; } = DateTime.Now;
 
-    public Utilisateur Utilisateur { get; set; }
+    public Utilisateurs Utilisateur { get; set; }
 }

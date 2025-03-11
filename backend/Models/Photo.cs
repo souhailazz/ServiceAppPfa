@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Photos
 {
     public int Id { get; set; } // Clé primaire
@@ -6,6 +9,6 @@ public class Photos
     public int? DemandeId { get; set; } // Clé étrangère vers Demandes (nullable)
 
     // Relations
-    public Professionnel? Professionnel { get; set; }
-    public Demande? Demande { get; set; }
+    public Professionnels? Professionnel { get; set; }
+    public Demandes? Demande { get; set; }
 }

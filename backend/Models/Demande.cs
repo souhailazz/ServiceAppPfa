@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Demandes
 {
     public int Id { get; set; } 
@@ -8,5 +11,5 @@ public class Demandes
     public DateTime DatePublication { get; set; } = DateTime.Now;
 
     
-    public Client Client { get; set; }
+    public Clients Client { get; set; }
 }

@@ -1,3 +1,6 @@
+using backend.Models;
+namespace backend.Models;
+
 public class Utilisateurs
 {
     public int Id { get; set; } // Clé primaire
