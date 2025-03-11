@@ -7,14 +7,14 @@ namespace backend.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Utilisateur> Utilisateurs { get; set; }
-        public DbSet<Professionnel> Professionnels { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Demande> Demandes { get; set; }
-        public DbSet<Photo> Photos { get; set; }
-        public DbSet<Commentaire> Commentaires { get; set; }
-        public DbSet<Evaluation> Evaluations { get; set; }
-        public DbSet<Chatbot> Chatbots { get; set; }
+        public DbSet<Utilisateurs> UtilisateurDB { get; set; }
+        public DbSet<Professionnels> ProfessionnelDB { get; set; }
+        public DbSet<Clients> ClientDB { get; set; }
+        public DbSet<Demandes> DemandeDB { get; set; }
+        public DbSet<Photos> PhotoDB { get; set; }
+        public DbSet<Commentaires> CommentaireDB { get; set; }
+        public DbSet<Evaluations> EvaluationDB { get; set; }
+        public DbSet<Chatbot> ChatbotDB { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
