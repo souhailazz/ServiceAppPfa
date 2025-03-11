@@ -1,4 +1,4 @@
-public class Evaluation
+public class Evaluations
 {
     public int Id { get; set; } // Clé primaire
     public int ProfessionnelId { get; set; } // Clé étrangère vers Professionnels

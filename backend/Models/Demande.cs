@@ -1,4 +1,4 @@
-public class Demande
+public class Demandes
 {
     public int Id { get; set; } 
     public int ClientId { get; set; } 

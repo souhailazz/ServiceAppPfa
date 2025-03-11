@@ -1,4 +1,4 @@
-public class Utilisateur
+public class Utilisateurs
 {
     public int Id { get; set; } // Clé primaire
     public string Nom { get; set; }

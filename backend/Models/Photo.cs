@@ -1,4 +1,4 @@
-public class Photo
+public class Photos
 {
     public int Id { get; set; } // Clé primaire
     public string Url { get; set; }

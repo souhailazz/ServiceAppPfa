@@ -1,4 +1,4 @@
-public class Commentaire
+public class Commentaires
 {
     public int Id { get; set; } // Clé primaire
     public int DemandeId { get; set; } // Clé étrangère vers Demandes

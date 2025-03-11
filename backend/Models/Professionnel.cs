@@ -1,4 +1,4 @@
-public class Professionnel
+public class Professionnels
 {
     public int Id { get; set; } // Clé primaire
     public int UtilisateurId { get; set; } // Clé étrangère vers Utilisateurs
