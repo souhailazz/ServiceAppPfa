@@ -1,101 +1,176 @@
-/* Main container styles */
+/* Red Theme CSS for Signup Page */
+:root {
+  --primary-red: #e63946;
+  --dark-red: #771118;
+  --light-red: #ffccd5;
+  --white: #ffffff;
+  --dark-gray: #333333;
+  --light-gray: #f8f9fa;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  color: var(--dark-gray);
+}
+
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
-  background-color: #f5f7fa;
+  padding: 20px;
 }
 
-/* Form styles */
 .register-form {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  padding: 30px;
   width: 100%;
   max-width: 500px;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
-/* Form title */
-.register-form h2 {
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 1.75rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Form group container */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-/* Input, select, and textarea styles */
-.form-group input,
-.form-group select,
-.form-group textarea {
+.register-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  height: 8px;
+  background-color: var(--primary-red);
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.register-form h2 {
+  color: var(--primary-red);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 18px;
+}
+
+.input-with-icon input,
+.input-with-icon select,
+.input-with-icon textarea {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus,
+.input-with-icon textarea:focus {
   outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
 }
 
-/* Textarea specific styles */
-.form-group textarea {
+.input-with-icon textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-/* Professional fields container */
 .professional-fields {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+  background-color: var(--light-gray);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--primary-red);
 }
 
-/* Submit button */
 .submit-btn {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 1.5rem;
-  background-color: #4f46e5;
-  color: white;
+  background-color: var(--primary-red);
+  color: var(--white);
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  width: 100%;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .submit-btn:hover {
-  background-color: #4338ca;
+  background-color: var(--dark-red);
+  transform: translateY(-2px);
 }
 
 .submit-btn:active {
-  background-color: #3730a3;
+  transform: translateY(0);
+}
+
+/* Styling for select dropdown */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e63946' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .register-form {
-    padding: 1.5rem;
+    padding: 20px;
   }
-  
+
+  .input-with-icon input,
+  .input-with-icon select,
+  .input-with-icon textarea {
+    padding: 10px 10px 10px 36px;
+    font-size: 14px;
+  }
+
+  .input-icon {
+    font-size: 16px;
+  }
+
   .register-form h2 {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 }
+
+/* Animation for form appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-form {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+

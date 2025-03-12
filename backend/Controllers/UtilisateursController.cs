@@ -28,10 +28,6 @@ public class UtilisateursController : ControllerBase
             return BadRequest("Tous les champs sont requis.");
         }
 
-        // Vérification du format de l'email
-     
-
-        // Vérification si l'email existe déjà
         var existingUser = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == utilisateur.Email);
         if (existingUser != null)
         {
