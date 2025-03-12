@@ -7,21 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Charger les variables d'environnement
 builder.Configuration.AddEnvironmentVariables();
 
-// Récupérer le serveur de la base de données depuis l'environnement
 var dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost"; // Default à "localhost" si non défini
 
-// Construire dynamiquement la connexion à la base de données
 var connectionString = $"Server={dbServer};Database=SiteDB;Trusted_Connection=True;TrustServerCertificate=True";
 
-// Ajouter les services pour les contrôleurs
 builder.Services.AddControllers();
 
-// Ajouter la connexion à la base de données
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString)
 );
 
-// Ajouter les services pour Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -35,7 +30,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configurer la pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -45,11 +39,12 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Swagger s'affiche à la racine
     });
 }
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 
-// Lancer l'application
 app.Run();
