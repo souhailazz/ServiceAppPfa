@@ -7,6 +7,7 @@ using backend.Models;
 
 namespace backend.Controllers;
 
+
 [Route("api/[controller]")]
 [ApiController]
 public class UtilisateursController : ControllerBase
@@ -20,38 +21,42 @@ public class UtilisateursController : ControllerBase
 
     // API pour enregistrer un utilisateur
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] Utilisateurs utilisateur)
+    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
-        if (string.IsNullOrEmpty(utilisateur.Nom) || string.IsNullOrEmpty(utilisateur.Prenom) || 
-            string.IsNullOrEmpty(utilisateur.Email) || string.IsNullOrEmpty(utilisateur.MotDePasseHash))
+        if (string.IsNullOrEmpty(registerDto.Nom) || string.IsNullOrEmpty(registerDto.Prenom) ||
+            string.IsNullOrEmpty(registerDto.Email) || string.IsNullOrEmpty(registerDto.Role))
         {
             return BadRequest("Tous les champs sont requis.");
         }
 
-        var existingUser = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == utilisateur.Email);
+        var existingUser = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
         if (existingUser != null)
         {
             return BadRequest("Un utilisateur avec cet email existe déjà.");
         }
 
-        // Hachage du mot de passe
-        var motDePasseHash = HashPassword(utilisateur.MotDePasseHash);
-        utilisateur.MotDePasseHash = motDePasseHash;
+        // Créer et enregistrer l'utilisateur
+        var utilisateur = new Utilisateurs
+        {
+            Nom = registerDto.Nom,
+            Prenom = registerDto.Prenom,
+            Email = registerDto.Email,
+            Role = registerDto.Role,
+            MotDePasseHash = HashPassword(registerDto.Email) // Utiliser un vrai mot de passe haché
+        };
 
-        // Créer l'utilisateur
         _context.UtilisateurDB.Add(utilisateur);
-        await _context.SaveChangesAsync();  // L'utilisateur est maintenant ajouté et son ID est généré
+        await _context.SaveChangesAsync();
 
-        // Si l'ID est généré, il est disponible ici
         if (utilisateur.Role.ToLower() == "professionnel")
         {
             // Créer un professionnel
             var professionnel = new Professionnels
             {
-                UtilisateurId = utilisateur.Id,  
-                Metier = "Metier exemple", 
-                Tarif = 100.0m, 
-                Disponibilite = "Disponible"
+                UtilisateurId = utilisateur.Id,
+                Metier = registerDto.Metier ?? "Non spécifié",
+                Tarif = registerDto.Tarif ?? 0.0m,
+                Disponibilite = registerDto.Disponibilite ?? "Non spécifié"
             };
 
             _context.ProfessionnelDB.Add(professionnel);
@@ -62,7 +67,7 @@ public class UtilisateursController : ControllerBase
             // Créer un client
             var client = new Clients
             {
-                UtilisateurId = utilisateur.Id  // L'ID est maintenant disponible
+                UtilisateurId = utilisateur.Id
             };
 
             _context.ClientDB.Add(client);
