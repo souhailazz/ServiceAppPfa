@@ -1,7 +1,7 @@
 /* Red Theme CSS for Signup Page */
 :root {
   --primary-red: #e63946;
-  --dark-red: #771118;
+  --dark-red: #c1121f;
   --light-red: #ffccd5;
   --white: #ffffff;
   --dark-gray: #333333;
@@ -68,6 +68,7 @@ body {
 .input-icon {
   position: absolute;
   left: 12px;
+  color: var(--primary-red);
   font-size: 18px;
 }
 
@@ -87,7 +88,7 @@ body {
 .input-with-icon textarea:focus {
   outline: none;
   border-color: var(--primary-red);
-  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+  box-shadow: none;
 }
 
 .input-with-icon textarea {

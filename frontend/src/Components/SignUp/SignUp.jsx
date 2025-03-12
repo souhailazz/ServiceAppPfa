@@ -1,10 +1,10 @@
-import './Login.css';
+import './SignUp.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Make sure this import is correct
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaMapMarkerAlt, FaUserTie } from 'react-icons/fa';
 import { MdWork, MdDescription, MdEuro, MdAccessTime } from 'react-icons/md';
 
-const Login = () => {
+const SignUp = () => {
     const navigate = useNavigate(); // Add this hook
 
   const [formData, setFormData] = useState({
@@ -143,4 +143,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

@@ -12,7 +12,5 @@ public class Professionnels
     public string? Description { get; set; }
     public decimal? Tarif { get; set; }
     public string? Disponibilite { get; set; }
-
-    
     public Utilisateurs Utilisateur { get; set; }
 }

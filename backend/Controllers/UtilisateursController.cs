@@ -48,10 +48,10 @@ public class UtilisateursController : ControllerBase
             // Créer un professionnel
             var professionnel = new Professionnels
             {
-                UtilisateurId = utilisateur.Id,  // L'ID est maintenant disponible
-                Metier = "Metier exemple", // Exemple, tu devras récupérer ça depuis le frontend ou demander à l'utilisateur de le préciser.
-                Tarif = 100.0m, // Exemple, idem, demande à l'utilisateur de définir cela.
-                Disponibilite = "Disponible" // Par défaut ou dynamique selon l'utilisateur
+                UtilisateurId = utilisateur.Id,  
+                Metier = "Metier exemple", 
+                Tarif = 100.0m, 
+                Disponibilite = "Disponible"
             };
 
             _context.ProfessionnelDB.Add(professionnel);
