@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import SignUp from'./Components/SignUp/SignUp'
+import SignUp from './Components/SignUp/SignUp'
+import Login from  "./Components/Login/Login"
 import HomePage from './Components/HomePage/HomePage'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navigate to="/SignUp" />} />
+          <Route path="/" element={<Navigate to="/Login" />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/home" element={<HomePage />} />
         </Routes>
       </div>  

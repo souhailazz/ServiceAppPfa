@@ -21,68 +21,78 @@ public class UtilisateursController : ControllerBase
         _httpContextAccessor = httpContextAccessor;
     }
 
-    // API pour enregistrer un utilisateur
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
+{
+    if (string.IsNullOrEmpty(registerDto.Nom) || string.IsNullOrEmpty(registerDto.Prenom) ||
+        string.IsNullOrEmpty(registerDto.Email) || string.IsNullOrEmpty(registerDto.Role) ||
+        string.IsNullOrEmpty(registerDto.MotDePasseHash))
     {
-        if (string.IsNullOrEmpty(registerDto.Nom) || string.IsNullOrEmpty(registerDto.Prenom) ||
-            string.IsNullOrEmpty(registerDto.Email) || string.IsNullOrEmpty(registerDto.Role))
-        {
-            return BadRequest("Tous les champs sont requis.");
-        }
-
-        var existingUser = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
-        if (existingUser != null)
-        {
-            return BadRequest("Un utilisateur avec cet email existe déjà.");
-        }
-
-        // Créer et enregistrer l'utilisateur
-        var utilisateur = new Utilisateurs
-        {
-            Nom = registerDto.Nom,
-            Prenom = registerDto.Prenom,
-            Email = registerDto.Email,
-            Role = registerDto.Role,
-            MotDePasseHash = HashPassword(registerDto.MotDePasseHash) // Utiliser un vrai mot de passe haché
-        };
-
-        _context.UtilisateurDB.Add(utilisateur);
-        await _context.SaveChangesAsync();
-
-        if (utilisateur.Role.ToLower() == "professionnel")
-        {
-            // Créer un professionnel
-            var professionnel = new Professionnels
-            {
-                UtilisateurId = utilisateur.Id,
-                Metier = registerDto.Metier ?? "Non spécifié",
-                Tarif = registerDto.Tarif ?? 0.0m,
-                Disponibilite = registerDto.Disponibilite ?? "Non spécifié"
-            };
-
-            _context.ProfessionnelDB.Add(professionnel);
-            await _context.SaveChangesAsync();
-        }
-        else if (utilisateur.Role.ToLower() == "client")
-        {
-            // Créer un client
-            var client = new Clients
-            {
-                UtilisateurId = utilisateur.Id
-            };
-
-            _context.ClientDB.Add(client);
-            await _context.SaveChangesAsync();
-        }
-        else
-        {
-            return BadRequest("Le rôle doit être soit 'professionnel' soit 'client'.");
-        }
-
-        return Ok(new { Message = "Utilisateur créé avec succès", UtilisateurId = utilisateur.Id });
+        return BadRequest("Les champs obligatoires sont requis.");
     }
 
+    var existingUser = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == registerDto.Email);
+    if (existingUser != null)
+    {
+        return BadRequest("Un utilisateur avec cet email existe déjà.");
+    }
+
+    // Créer et enregistrer l'utilisateur
+    var utilisateur = new Utilisateurs
+    {
+        Nom = registerDto.Nom,
+        Prenom = registerDto.Prenom,
+        Email = registerDto.Email,
+        MotDePasseHash = HashPassword(registerDto.MotDePasseHash),
+        Telephone = registerDto.Telephone,
+        Ville = registerDto.Ville,
+        Role = registerDto.Role
+    };
+
+    _context.UtilisateurDB.Add(utilisateur);
+    await _context.SaveChangesAsync();
+
+    if (utilisateur.Role.ToLower() == "professionnel")
+    {
+        // Vérifier les champs requis pour un professionnel
+        if (string.IsNullOrEmpty(registerDto.Metier) || !registerDto.Tarif.HasValue || 
+            string.IsNullOrEmpty(registerDto.Disponibilite) || string.IsNullOrEmpty(registerDto.Description))
+        {
+            // Si nécessaire, on pourrait supprimer l'utilisateur déjà créé
+            return BadRequest("Les informations professionnelles sont incomplètes.");
+        }
+        
+        // Créer un professionnel
+        var professionnel = new Professionnels
+        {
+            UtilisateurId = utilisateur.Id,
+            Metier = registerDto.Metier,
+            Description = registerDto.Description,
+            Tarif = registerDto.Tarif.Value,
+            Disponibilite = registerDto.Disponibilite
+        };
+
+        _context.ProfessionnelDB.Add(professionnel);
+        await _context.SaveChangesAsync();
+    }
+    else if (utilisateur.Role.ToLower() == "client")
+    {
+        // Créer un client
+        var client = new Clients
+        {
+            UtilisateurId = utilisateur.Id
+        };
+
+        _context.ClientDB.Add(client);
+        await _context.SaveChangesAsync();
+    }
+    else
+    {
+        return BadRequest("Le rôle doit être soit 'professionnel' soit 'client'.");
+    }
+
+    return Ok(new { Message = "Utilisateur créé avec succès", UtilisateurId = utilisateur.Id, Role = utilisateur.Role });
+}
     // API pour la connexion de l'utilisateur
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)

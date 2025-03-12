@@ -5,21 +5,20 @@ import { FaUser, FaEnvelope, FaLock, FaPhone, FaMapMarkerAlt, FaUserTie } from '
 import { MdWork, MdDescription, MdEuro, MdAccessTime } from 'react-icons/md';
 
 const SignUp = () => {
-    const navigate = useNavigate(); // Add this hook
-
-  const [formData, setFormData] = useState({
-    nom: '',
-    prenom: '',
-    email: '',
-    motDePasseHash: '',
-    telephone: '',
-    ville: '',
-    role: 'client',
-    metier: '',
-    description: '',
-    tarif: '',
-    disponibilite: ''
-  });
+    const navigate = useNavigate(); 
+    const [formData, setFormData] = useState({
+        nom: '',
+        prenom: '',
+        email: '',
+        motDePasseHash: '',
+        telephone: '',
+        ville: '',
+        role: 'Client',  // Change to uppercase 'C'
+        metier: '',
+        description: '',
+        tarif: 0,  // Make sure this is a number, not a string
+        disponibilite: ''
+      });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,7 +30,11 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Form submitted'); 
+    console.log('Form data:', formData); 
+    
     try {
+      console.log('Sending request to API...');
       const response = await fetch('http://localhost:5207/api/Utilisateurs/register', {
         method: 'POST',
         headers: {
@@ -39,12 +42,26 @@ const SignUp = () => {
         },
         body: JSON.stringify(formData)
       });
-
+  
+      console.log('Response received:', response);
+      
       if (response.ok) {
+        const result = await response.json();
+        console.log('Registration successful:', result);
         navigate('/HomePage');
+      } else {
+        const errorText = await response.text();
+        console.error('Response not OK:', response.status, errorText);
+        try {
+          const errorData = JSON.parse(errorText);
+          alert(errorData.Message || 'Échec de l\'inscription');
+        } catch (e) {
+          alert(`Échec de l'inscription: ${response.status} ${response.statusText}`);
+        }
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error('Fetch error:', error);
+      alert('Erreur de connexion au serveur: ' + error.message);
     }
   };
 
