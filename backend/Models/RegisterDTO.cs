@@ -6,6 +6,8 @@ namespace backend.Models;
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Email { get; set; }
+         public string MotDePasseHash { get; set; }
+
         public string Role { get; set; }
 
         

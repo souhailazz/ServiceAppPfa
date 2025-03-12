@@ -13,10 +13,12 @@ namespace backend.Controllers;
 public class UtilisateursController : ControllerBase
 {
     private readonly AppDbContext _context;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UtilisateursController(AppDbContext context)
+    public UtilisateursController(AppDbContext context, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     // API pour enregistrer un utilisateur
@@ -42,7 +44,7 @@ public class UtilisateursController : ControllerBase
             Prenom = registerDto.Prenom,
             Email = registerDto.Email,
             Role = registerDto.Role,
-            MotDePasseHash = HashPassword(registerDto.Email) // Utiliser un vrai mot de passe haché
+            MotDePasseHash = HashPassword(registerDto.MotDePasseHash) // Utiliser un vrai mot de passe haché
         };
 
         _context.UtilisateurDB.Add(utilisateur);
@@ -55,7 +57,6 @@ public class UtilisateursController : ControllerBase
             {
                 UtilisateurId = utilisateur.Id,
                 Metier = registerDto.Metier ?? "Non spécifié",
-                Description=registerDto.Description,
                 Tarif = registerDto.Tarif ?? 0.0m,
                 Disponibilite = registerDto.Disponibilite ?? "Non spécifié"
             };
@@ -82,6 +83,47 @@ public class UtilisateursController : ControllerBase
         return Ok(new { Message = "Utilisateur créé avec succès", UtilisateurId = utilisateur.Id });
     }
 
+    // API pour la connexion de l'utilisateur
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+    {
+        if (string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.MotDePasse))
+        {
+            return BadRequest("Email et mot de passe sont requis.");
+        }
+
+        var utilisateur = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+        if (utilisateur == null || utilisateur.MotDePasseHash != HashPassword(loginDto.MotDePasse))
+        {
+            return Unauthorized("Email ou mot de passe incorrect.");
+        }
+
+        // Stocker l'ID de l'utilisateur dans la session
+        _httpContextAccessor.HttpContext.Session.SetInt32("UtilisateurId", utilisateur.Id);
+
+        return Ok(new { Message = "Connexion réussie", UtilisateurId = utilisateur.Id, Role = utilisateur.Role });
+    }
+
+    // API pour récupérer l'utilisateur connecté
+    [HttpGet("session-user")]
+    public IActionResult GetSessionUser()
+    {
+        var utilisateurId = _httpContextAccessor.HttpContext.Session.GetInt32("UtilisateurId");
+        if (utilisateurId == null)
+        {
+            return Unauthorized("Aucun utilisateur connecté.");
+        }
+        return Ok(new { UtilisateurId = utilisateurId });
+    }
+
+    // API pour déconnecter l'utilisateur
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        _httpContextAccessor.HttpContext.Session.Clear();
+        return Ok(new { Message = "Déconnexion réussie" });
+    }
+
     // Méthode simple pour hacher le mot de passe
     private string HashPassword(string password)
     {
@@ -91,4 +133,11 @@ public class UtilisateursController : ControllerBase
             return Convert.ToBase64String(hashBytes);
         }
     }
+}
+
+// DTO pour la connexion
+public class LoginDto
+{
+    public string Email { get; set; }
+    public string MotDePasse { get; set; }
 }

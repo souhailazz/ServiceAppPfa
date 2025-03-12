@@ -1,6 +1,7 @@
 using backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,20 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// ✅ Nécessaire pour la gestion des sessions
+builder.Services.AddDistributedMemoryCache(); // Ajoute un cache mémoire pour stocker les sessions
+
+// ✅ Activer les sessions
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Durée avant expiration
+    options.Cookie.HttpOnly = true; // Sécurité
+    options.Cookie.IsEssential = true; // Marque comme essentiel
+});
+
+// ✅ Enregistrer IHttpContextAccessor pour accéder à la session
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -39,11 +54,15 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty; // Swagger s'affiche à la racine
     });
 }
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// ✅ Ajouter l'utilisation des sessions AVANT Authorization
+app.UseSession();
+
 app.UseAuthorization();
 app.MapControllers();
 
