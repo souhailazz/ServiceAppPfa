@@ -10,6 +10,8 @@ namespace backend.Models;
 
         
         public string? Metier { get; set; }
+                public string? Description { get; set; }
+
         public decimal? Tarif { get; set; }
         public string? Disponibilite { get; set; }
     }

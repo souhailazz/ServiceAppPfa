@@ -108,10 +108,32 @@ const SignUp = () => {
                 {formData.role === 'professionnel' && (
                     <div className="professional-fields">
                         <div className="form-group">
-                            <div className="input-with-icon">
-                                <MdWork className="input-icon" />
-                                <input type="text" name="metier" value={formData.metier} onChange={handleChange} placeholder="Métier" required />
-                            </div>
+                        <div className="form-group">
+    <div className="input-with-icon">
+        <MdWork className="input-icon" />
+        <select 
+            name="metier" 
+            value={formData.metier} 
+            onChange={handleChange} 
+            required
+            className="profession-select"
+        >
+            <option value="">Sélectionnez votre métier</option>
+            <option value="Plombier">Plombier</option>
+            <option value="Électricien">Électricien</option>
+            <option value="Mécanicien">Mécanicien</option>
+            <option value="Jardinier">Jardinier</option>
+            <option value="Menuisier">Menuisier</option>
+            <option value="Peintre">Peintre</option>
+            <option value="Peintre">Menuisier</option>
+            <option value="Menuisier">Menuisier</option>
+            <option value="Tolier">Tolier</option>
+
+
+
+        </select>
+    </div>
+</div>
                         </div>
 
                         <div className="form-group">

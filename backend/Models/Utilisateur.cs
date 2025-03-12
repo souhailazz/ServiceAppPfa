@@ -16,4 +16,6 @@ public class Utilisateurs
     public string? Telephone { get; set; }
     public string? Ville { get; set; }
     public string Role { get; set; }
+    
+    
 }

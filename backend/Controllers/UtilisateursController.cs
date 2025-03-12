@@ -55,6 +55,7 @@ public class UtilisateursController : ControllerBase
             {
                 UtilisateurId = utilisateur.Id,
                 Metier = registerDto.Metier ?? "Non spécifié",
+                Description=registerDto.Description,
                 Tarif = registerDto.Tarif ?? 0.0m,
                 Disponibilite = registerDto.Disponibilite ?? "Non spécifié"
             };
