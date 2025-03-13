@@ -62,7 +62,8 @@ app.UseRouting();
 
 // ✅ Ajouter l'utilisation des sessions AVANT Authorization
 app.UseSession();
-
+app.UseStaticFiles(); // Enable serving static files
+app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
