@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yObjtOnNFPEj+VhGYCAddbA7BpO/RQwSs/dYnb3tpwg=",
+  "Hash": "afjBY3nRO3/D5UfvJxRgvgojeTfL7ocB+aqd4UGcT5E=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -34,6 +34,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\234a5dce-4ec7-4235-9d5d-b121774a6865.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg"
     }
   ]
 }

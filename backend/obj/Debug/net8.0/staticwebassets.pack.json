@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\uploads\\234a5dce-4ec7-4235-9d5d-b121774a6865.jpg"
     },
     {
+      "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
+      "PackagePath": "staticwebassets\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
+      "PackagePath": "staticwebassets\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

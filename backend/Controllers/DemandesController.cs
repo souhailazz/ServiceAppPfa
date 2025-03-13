@@ -102,6 +102,31 @@ public class DemandesController : ControllerBase
         // Retourne une URL accessible
         return $"/uploads/{fileName}";
     }
+
+    [HttpGet("all-demande")]
+    public async Task<IActionResult> GetDemandes()
+    {
+        var demandes = await _context.DemandeDB
+            .OrderByDescending(d => d.DatePublication)
+            .Include(d => d.Photos)
+            .Select(d => new
+            {
+                d.Id,
+                d.Titre,
+                d.Description,
+                d.Ville,
+                d.DatePublication,
+                photoUrll = d.Photos.Select(p => p.Url).ToList()
+            })
+            .ToListAsync();
+
+        if (demandes == null || !demandes.Any())
+        {
+            return NotFound("Aucune demande trouvée.");
+        }
+
+        return Ok(demandes);
+    }
 }
 
 public class DemandeDto
@@ -109,5 +134,6 @@ public class DemandeDto
     public int ClientId { get; set; }
     public string Titre { get; set; }
     public string Description { get; set; }
-    public string Ville { get; set; }
+    public string Ville { get; set; }   
+   
 }
