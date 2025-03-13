@@ -5160,23 +5160,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dafal\\.nuget\\packages\\": {},
+    "C:\\Users\\souhail\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\backend.csproj",
+      "projectUniqueName": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\dafal\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\obj\\",
+      "projectPath": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\souhail\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\dafal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\souhail\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5247,7 +5247,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

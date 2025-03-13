@@ -1,0 +1,195 @@
+/* Demande.css - Elegant and modern styling */
+
+.demande-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .demande-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .demande-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .demande-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .demande-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 1rem 1.5rem 0.5rem;
+    line-height: 1.3;
+  }
+  
+  .demande-description {
+    color: #666;
+    margin: 0 1.5rem 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .demande-location {
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-weight: 500;
+    margin: 0 1.5rem 0.5rem;
+  }
+  
+  .demande-location::before {
+    content: "📍";
+    margin-right: 0.5rem;
+  }
+  
+  .demande-date {
+    color: #888;
+    font-size: 0.85rem;
+    margin: 0 1.5rem 1rem;
+  }
+  
+  .demande-actions {
+    display: flex;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #f0f0f0;
+    gap: 1rem;
+  }
+  
+  .demande-like,
+  .demande-comment {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+  }
+  
+  .demande-like {
+    background-color: #f0f7ff;
+    color: #3b82f6;
+  }
+  
+  .demande-like:hover {
+    background-color: #dbeafe;
+  }
+  
+  .demande-comment {
+    background-color: #f5f5f5;
+    color: #555;
+  }
+  
+  .demande-comment:hover {
+    background-color: #e5e5e5;
+  }
+  
+  /* Add icons to buttons */
+  .demande-like::before {
+    content: "❤️ ";
+    font-size: 0.9rem;
+  }
+  
+  .demande-comment::before {
+    content: "💬 ";
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .demande-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+  
+    .demande-title {
+      font-size: 1.3rem;
+      margin: 0.8rem 1.2rem 0.4rem;
+    }
+  
+    .demande-description,
+    .demande-location,
+    .demande-date {
+      margin-left: 1.2rem;
+      margin-right: 1.2rem;
+    }
+  
+    .demande-actions {
+      padding: 0.8rem 1.2rem;
+    }
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .demande-card {
+      background-color: #1f2937;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+  
+    .demande-title {
+      color: #f3f4f6;
+    }
+  
+    .demande-description {
+      color: #d1d5db;
+    }
+  
+    .demande-location {
+      color: #9ca3af;
+    }
+  
+    .demande-date {
+      color: #6b7280;
+    }
+  
+    .demande-card {
+      border-color: #374151;
+    }
+  
+    .demande-actions {
+      border-color: #374151;
+    }
+  
+    .demande-like {
+      background-color: #1e3a8a;
+      color: #93c5fd;
+    }
+  
+    .demande-like:hover {
+      background-color: #1e40af;
+    }
+  
+    .demande-comment {
+      background-color: #374151;
+      color: #d1d5db;
+    }
+  
+    .demande-comment:hover {
+      background-color: #4b5563;
+    }
+  }
+  
+  
