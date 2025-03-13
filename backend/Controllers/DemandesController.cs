@@ -127,8 +127,77 @@ public class DemandesController : ControllerBase
 
         return Ok(demandes);
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDemandeById(int id)
+    {
+        var demande = await _context.DemandeDB
+            .Include(d => d.Photos)
+            .Where(d => d.Id == id)
+            .Select(d => new
+            {
+                d.Id,
+                d.Titre,
+                d.Description,
+                d.Ville,
+                d.DatePublication,
+                photoUrll = d.Photos.Select(p => p.Url).ToList()
+            })
+            .FirstOrDefaultAsync();
+
+        if (demande == null)
+        {
+            return NotFound("Demande non trouvée.");
+        }
+
+        return Ok(demande);
+    }
+  [HttpDelete("{id}")]
+public async Task<IActionResult> DeleteDemande(int id)
+{
+    var demande = await _context.DemandeDB.FindAsync(id);
+    if (demande == null)
+    {
+        return NotFound("Demande non trouvée.");
+    }
+
+    // Supprimer les photos associées dans la base de données
+    var photos = _context.PhotoDB.Where(p => p.DemandeId == id);
+    _context.PhotoDB.RemoveRange(photos);
+
+    // Supprimer la demande
+    _context.DemandeDB.Remove(demande);
+    await _context.SaveChangesAsync();
+
+    return Ok("Demande et ses photos supprimées avec succès.");
+}
+[HttpGet("client/{clientId}")]
+public async Task<IActionResult> GetDemandesByClient(int clientId)
+{
+    var demandes = await _context.DemandeDB
+        .Where(d => d.ClientId == clientId)
+        .Include(d => d.Photos)
+        .OrderByDescending(d => d.DatePublication)
+        .Select(d => new
+        {
+            d.Id,
+            d.Titre,
+            d.Description,
+            d.Ville,
+            d.DatePublication,
+            photoUrll = d.Photos.Select(p => p.Url).ToList()
+        })
+        .ToListAsync();
+
+    if (!demandes.Any())
+    {
+        return NotFound("Aucune demande trouvée pour ce client.");
+    }
+
+    return Ok(demandes);
 }
 
+}
 public class DemandeDto
 {
     public int ClientId { get; set; }
