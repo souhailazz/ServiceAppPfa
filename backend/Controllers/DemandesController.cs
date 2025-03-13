@@ -23,16 +23,25 @@ public class DemandesController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateDemande([FromForm] DemandeDto demandeDto, [FromForm] List<IFormFile> photos)
     {
-        if (string.IsNullOrEmpty(demandeDto.Titre) || string.IsNullOrEmpty(demandeDto.Description) ||
-            string.IsNullOrEmpty(demandeDto.Ville) || demandeDto.ClientId <= 0)
-        {
-            return BadRequest("Tous les champs sont requis.");
-        }
+         
+
+    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == demandeDto.ClientId);
+    
+    if (client == null)
+    {
+        return Unauthorized("Aucun client associé à cet utilisateur.");
+    }
+
+    if (string.IsNullOrEmpty(demandeDto.Titre) || string.IsNullOrEmpty(demandeDto.Description) ||
+        string.IsNullOrEmpty(demandeDto.Ville))
+    {
+        return BadRequest("Tous les champs sont requis.");
+    }
 
         // Création de la demande
         var nouvelleDemande = new Demandes
         {
-            ClientId = demandeDto.ClientId,
+            ClientId = client.Id,
             Titre = demandeDto.Titre,
             Description = demandeDto.Description,
             Ville = demandeDto.Ville,

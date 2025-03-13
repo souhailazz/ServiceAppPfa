@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tMTzo6+hzSu9KxtrZVyioaaDAqpSEret5aULp32FL8k=",
+  "Hash": "zf6WQgwHx4wSSAia+VyJH0p0YRJLSWWTOLbtwFXuRmk=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "backend\\wwwroot",
       "Source": "backend",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\234a5dce-4ec7-4235-9d5d-b121774a6865.jpg",
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\234a5dce-4ec7-4235-9d5d-b121774a6865.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "uploads/234a5dce-4ec7-4235-9d5d-b121774a6865.jpg",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\234a5dce-4ec7-4235-9d5d-b121774a6865.jpg"
     },
     {
-      "Identity": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "uploads/7429de67-926c-48a4-9daf-b129fa2b98a3.jpg",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\7429de67-926c-48a4-9daf-b129fa2b98a3.jpg"
     },
     {
-      "Identity": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\750992d6-b94a-4ef1-a517-dd76bf9d9e7b.jpg",
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\750992d6-b94a-4ef1-a517-dd76bf9d9e7b.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "uploads/750992d6-b94a-4ef1-a517-dd76bf9d9e7b.jpg",
       "AssetKind": "All",
@@ -74,10 +74,29 @@
       "OriginalItemSpec": "wwwroot\\uploads\\750992d6-b94a-4ef1-a517-dd76bf9d9e7b.jpg"
     },
     {
-      "Identity": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\88041681-8fdd-4351-9399-7e0d476166fb.jpg",
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\7987c37e-e341-46a2-9724-7dd1c4a1914a.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/7987c37e-e341-46a2-9724-7dd1c4a1914a.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\7987c37e-e341-46a2-9724-7dd1c4a1914a.png"
+    },
+    {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\88041681-8fdd-4351-9399-7e0d476166fb.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "uploads/88041681-8fdd-4351-9399-7e0d476166fb.jpg",
       "AssetKind": "All",
@@ -93,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\uploads\\88041681-8fdd-4351-9399-7e0d476166fb.jpg"
     },
     {
-      "Identity": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\souhail\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "uploads/90d757c8-3c3c-4f4c-ab4d-89c0ad18fb4b.jpg",
       "AssetKind": "All",
