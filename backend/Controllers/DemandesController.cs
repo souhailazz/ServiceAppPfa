@@ -196,6 +196,22 @@ public async Task<IActionResult> GetDemandesByClient(int clientId)
 
     return Ok(demandes);
 }
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateDemande(int id, [FromBody] DemandeDto updatedDemande)
+{
+    var demande = await _context.DemandeDB.FindAsync(id);
+    if (demande == null)
+    {
+        return NotFound("Demande non trouvée.");
+    }
+
+    demande.Titre = updatedDemande.Titre;
+    demande.Description = updatedDemande.Description;
+    demande.Ville = updatedDemande.Ville;
+
+    await _context.SaveChangesAsync();
+    return Ok("Demande mise à jour avec succès.");
+}
 
 }
 public class DemandeDto
