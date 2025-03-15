@@ -25,7 +25,7 @@ public class DemandesController : ControllerBase
     {
          
 
-    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == demandeDto.ClientId);
+    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == demandeDto.ClientId )//CLIENTID == userId;
     
     if (client == null)
     {
@@ -180,11 +180,18 @@ public async Task<IActionResult> DeleteDemande(int id)
 
     return Ok("Demande et ses photos supprimées avec succès.");
 }
-[HttpGet("client/{clientId}")]
-public async Task<IActionResult> GetDemandesByClient(int clientId)
+[HttpGet("client/{UserId}")]
+public async Task<IActionResult> GetDemandesByClient(int UserId)
 {
+    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == UserId);
+    
+    if (client == null)
+    {
+        return NotFound("Client non trouvé.");
+    }
+
     var demandes = await _context.DemandeDB
-        .Where(d => d.ClientId == clientId)
+        .Where(d => d.ClientId == client.Id)
         .Include(d => d.Photos)
         .OrderByDescending(d => d.DatePublication)
         .Select(d => new
