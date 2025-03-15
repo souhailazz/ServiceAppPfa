@@ -25,7 +25,7 @@ public class DemandesController : ControllerBase
     {
          
 
-    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == demandeDto.ClientId )//CLIENTID == userId;
+    var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == demandeDto.ClientId );//CLIENTID == userId;
     
     if (client == null)
     {

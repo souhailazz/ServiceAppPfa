@@ -16,3 +16,5 @@ public class Demandes
     public virtual ICollection<Photos> Photos { get; set; }
     public Clients Client { get; set; }
 }
+
+

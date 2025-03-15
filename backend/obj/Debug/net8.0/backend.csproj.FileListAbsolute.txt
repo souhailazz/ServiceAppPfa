@@ -367,6 +367,7 @@ C:\Users\Microsoft\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\refin
 C:\Users\Microsoft\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\Microsoft\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\Microsoft\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\ref\backend.dll
+C:\Users\souhail\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\backend.staticwebassets.runtime.json
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\appsettings.json
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\backend.staticwebassets.runtime.json
@@ -509,4 +510,3 @@ C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\backend.r
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\backend.pdb
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\ref\backend.dll
-C:\Users\souhail\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\backend.staticwebassets.runtime.json
