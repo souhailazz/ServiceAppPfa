@@ -143,9 +143,46 @@ public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
             return Convert.ToBase64String(hashBytes);
         }
     }
+
+    [HttpPost("upload-photo/{utilisateurId}")]
+    public async Task<IActionResult> UploadPhoto(int utilisateurId, IFormFile file)
+    {
+        var professionnel = await _context.ProfessionnelDB.FirstOrDefaultAsync(p => p.UtilisateurId == utilisateurId);
+        if (professionnel == null)
+        {
+            return NotFound("Professionnel non trouvé.");
+        }
+
+        if (file == null || file.Length == 0)
+        {
+            return BadRequest("Aucune image n'a été envoyée.");
+        }
+
+        // Générer un nom de fichier unique pour éviter les conflits
+        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+        string filePath = Path.Combine("wwwroot/uploads", fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        string photoUrl = "/uploads/" + fileName;
+
+        // Ajouter la photo dans la table Photos avec l'ID du professionnel
+        var photo = new Photos
+        {
+            Url = photoUrl,
+            ProfessionnelId = professionnel.Id
+        };
+
+        _context.PhotoDB.Add(photo);
+        await _context.SaveChangesAsync();
+
+        return Ok(new { Message = "Photo uploadée avec succès", PhotoUrl = photo.Url });
+    }
 }
 
-// DTO pour la connexion
 public class LoginDto
 {
     public string Email { get; set; }
