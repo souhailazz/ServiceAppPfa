@@ -1,0 +1,323 @@
+/* Reddit-inspired styling for Profile component */
+
+:root {
+    --reddit-orange: #ff4500;
+    --reddit-blue: #0079d3;
+    --reddit-light-gray: #f8f9fa;
+    --reddit-border: #edeff1;
+    --reddit-text: #1c1c1c;
+    --reddit-secondary-text: #7c7c7c;
+    --reddit-card-bg: #ffffff;
+    --reddit-danger: #ea0027;
+    --reddit-success: #46d160;
+    --reddit-modal-overlay: rgba(0, 0, 0, 0.5);
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
+    background-color: var(--reddit-light-gray);
+    color: var(--reddit-text);
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Profile container */
+  .profile-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .profile-container h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--reddit-text);
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--reddit-border);
+  }
+  
+  /* Loading state */
+  .profile-container > p {
+    text-align: center;
+    font-size: 16px;
+    color: var(--reddit-secondary-text);
+    margin: 40px 0;
+  }
+  
+  /* No demands message */
+  .no-demands {
+    background-color: var(--reddit-card-bg);
+    border: 1px solid var(--reddit-border);
+    border-radius: 4px;
+    padding: 30px;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .no-demands p {
+    margin-bottom: 20px;
+    color: var(--reddit-secondary-text);
+    font-size: 16px;
+  }
+  
+  .create-btn {
+    display: inline-block;
+    background-color: var(--reddit-blue);
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  
+  .create-btn:hover {
+    background-color: #005fa3;
+  }
+  
+  /* Demande grid */
+  .demande-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* Demande card */
+  .demande-card {
+    background-color: var(--reddit-card-bg);
+    border: 1px solid var(--reddit-border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .demande-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .demande-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 12px;
+  }
+  
+  .demande-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .demande-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+    color: var(--reddit-text);
+  }
+  
+  .demande-description {
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    color: var(--reddit-text);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .demande-location,
+  .demande-date {
+    font-size: 12px;
+    color: var(--reddit-secondary-text);
+    margin: 4px 0;
+  }
+  
+  /* Card actions */
+  .demande-actions {
+    display: flex;
+    padding: 8px 12px;
+    border-top: 1px solid var(--reddit-border);
+    background-color: #f9f9f9;
+    gap: 10px;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, opacity 0.2s;
+    border: none;
+  }
+  
+  .edit-btn {
+    background-color: var(--reddit-blue);
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #005fa3;
+  }
+  
+  .delete-btn {
+    background-color: var(--reddit-danger);
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c50023;
+  }
+  
+  /* Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--reddit-modal-overlay);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: var(--reddit-card-bg);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 4px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--reddit-text);
+    font-size: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--reddit-border);
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--reddit-secondary-text);
+  }
+  
+  .close-btn:hover {
+    color: var(--reddit-text);
+  }
+  
+  /* Form styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--reddit-border);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--reddit-blue);
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .form-buttons button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+  }
+  
+  .form-buttons button:first-child {
+    background-color: var(--reddit-light-gray);
+    color: var(--reddit-text);
+    border: 1px solid var(--reddit-border);
+  }
+  
+  .form-buttons button:first-child:hover {
+    background-color: #e9e9e9;
+  }
+  
+  .form-buttons button:last-child {
+    background-color: var(--reddit-blue);
+    color: white;
+  }
+  
+  .form-buttons button:last-child:hover {
+    background-color: #005fa3;
+  }
+  
+  .form-buttons button.delete-btn {
+    background-color: var(--reddit-danger);
+  }
+  
+  .form-buttons button.delete-btn:hover {
+    background-color: #c50023;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .profile-container {
+      padding: 15px;
+    }
+  
+    .modal-content {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .form-buttons {
+      flex-direction: column;
+    }
+  
+    .form-buttons button {
+      width: 100%;
+    }
+  }
+  
+  
