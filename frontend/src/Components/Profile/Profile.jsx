@@ -15,17 +15,21 @@ const Profile = () => {
   });
   const [showEditModal, setShowEditModal] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(null);
-
-  // Replace with actual user ID from your authentication system
-  const loggedInUserId = 24; // This should come from your auth context/state
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    fetchUserDemandes();
-  }, []);
+    const storedUserId = sessionStorage.getItem('userId');
+    console.log('Retrieved userId from sessionStorage:', storedUserId);
+    setUserId(storedUserId ? parseInt(storedUserId, 10) : null);
+
+    if (userId) {
+      fetchUserDemandes();
+    }
+  }, [userId]);
 
   const fetchUserDemandes = () => {
     setLoading(true);
-    fetch(`${API_URL}/api/Demandes/client/${loggedInUserId}`)
+    fetch(`${API_URL}/api/Demandes/client/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Aucune demande trouvée");
@@ -79,12 +83,11 @@ const Profile = () => {
         },
         body: JSON.stringify({
           ...formData,
-          clientId: loggedInUserId
+          clientId: userId
         })
       });
 
       if (response.ok) {
-        // Update local state
         setDemandes(prev => 
           prev.map(dem => 
             dem.id === editingDemande.id 
@@ -112,7 +115,6 @@ const Profile = () => {
       });
 
       if (response.ok) {
-        // Remove from local state
         setDemandes(prev => prev.filter(dem => dem.id !== confirmDelete));
         setConfirmDelete(null);
       } else {
@@ -131,6 +133,15 @@ const Profile = () => {
     setShowEditModal(false);
     setEditingDemande(null);
   };
+
+  if (!userId) {
+    return (
+      <div className="profile-container">
+        <p>Veuillez vous connecter pour voir vos demandes.</p>
+        <Link to="/login" className="login-link">Se connecter</Link>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-container">
@@ -164,7 +175,6 @@ const Profile = () => {
         </div>
       )}
 
-      {/* Edit Modal */}
       {showEditModal && (
         <div className="modal">
           <div className="modal-content">
@@ -212,7 +222,6 @@ const Profile = () => {
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {confirmDelete && (
         <div className="modal">
           <div className="modal-content">
