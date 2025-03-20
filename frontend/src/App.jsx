@@ -6,14 +6,16 @@ import './App.css'
 import DemandeDetails from "./Components/DemandeDetails/DemandeDetails";
 import Profile from './Components/Profile/Profile'
 import Demande from './Components/Demande/Demande'
-
+import logo from "./assets/Images/image.png";
 function App() {
   return (
     <Router>
       <div className="App">
         <header>
           <nav>
-            <Link to="/Login">ALLoService</Link>
+          <Link to="/home">
+  <img src={logo} alt="ALLoService Logo" style={{ height: "40px" }} />
+</Link>
             <Link to="/signup">Register</Link>
             <Link to="/home">Accueil</Link>
             <Link to="/demande">Demande</Link>

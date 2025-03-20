@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YlwrhvlgD4/j71EN47Nj23Wcw80IYxK3/uhfkdaW1H4=",
+  "Hash": "oYCdjtgSdZ95+DF+EjFbXGxSqS+dZhyl3eG3uHCfqJo=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -226,6 +226,25 @@
       "OriginalItemSpec": "wwwroot\\uploads\\9a3331ec-9aec-4d48-bbef-95e5ba68f267.png"
     },
     {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\9f45e963-84f2-4214-b1bb-bc44ccbd688c.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/9f45e963-84f2-4214-b1bb-bc44ccbd688c.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\9f45e963-84f2-4214-b1bb-bc44ccbd688c.jpg"
+    },
+    {
       "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\b2e465e9-71c3-4865-9293-7380255c4506.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -243,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\b2e465e9-71c3-4865-9293-7380255c4506.png"
+    },
+    {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\c81395cb-031a-4d3f-bb5e-00ed9f166635.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/c81395cb-031a-4d3f-bb5e-00ed9f166635.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\c81395cb-031a-4d3f-bb5e-00ed9f166635.jpg"
     },
     {
       "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\d35feebc-d8ca-45f0-a023-a84e0273d214.jpg",
@@ -281,6 +319,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\fe426cec-6525-4b05-b45b-74e22146d1e0.png"
+    },
+    {
+      "Identity": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\image.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "uploads/image.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\image.png"
     }
   ]
 }

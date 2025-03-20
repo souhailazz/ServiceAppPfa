@@ -20,13 +20,14 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
+ 
   background-color: var(--light-background);
   color: var(--text-color);
   margin: 0;
   padding: 0;
   line-height: 1.5;
+  font-family: TT Chocolates, sans-serif;
+  font-weight: 530;
 }
 
 /* Main container layout - fixed to ensure proper alignment */
@@ -53,15 +54,17 @@ body {
 .demande-form-container {
   width: 350px;
   padding: 24px;
-  background-color: var(--form-background);
+  background-color: white;
   border-left: 1px solid var(--border-color);
-  height: 100vh;
+  height: 75vh;
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 87px;
+  right: 350px;
   overflow-y: auto;
   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
   z-index: 10;
+ 
+  border-radius: 20px;
 }
 
 /* Card styling - enhanced with better shadows and transitions */
@@ -88,7 +91,7 @@ body {
 
 .demande-image {
   width: 100%;
-  height: 220px;
+  height: 300px;
   object-fit: cover;
   transition: opacity 0.3s ease;
 }
@@ -138,10 +141,23 @@ body {
   margin: 0;
   padding: 16px 16px 6px;
   color: var(--text-color);
+  border-bottom: 1px solid #EBEBEB;
+  margin-bottom: 10px;
 }
+.demande-public-title h4{
+  font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    padding: 14px 14px 5px;
+    color: var(--text-color);
+    border-bottom: 1px solid #EBEBEB;
+    margin-bottom: 5px;
+  }
+  
 
 .demande-description {
-  font-size: 14px;
+  font-size: 15px;
   margin: 0;
   padding: 0 16px 12px;
   color: var(--light-text);
@@ -239,11 +255,11 @@ body {
 
 /* Form styling - improved with better spacing and visual hierarchy */
 .demande-form-container h2 {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   color: var(--text-color);
   font-size: 20px;
   font-weight: 600;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
   padding-bottom: 10px;
 }
 
@@ -259,7 +275,8 @@ body {
 }
 
 .form-group label {
-  margin-bottom: 6px;
+ 
+  margin-bottom: 0px;
   font-weight: 500;
   font-size: 14px;
   color: var(--text-color);
@@ -342,11 +359,15 @@ body {
   color: white;
   padding: 14px;
   border: none;
-  border-radius: var(--radius);
+  border-radius: 300px;
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
-  margin-top: 16px;
+  margin-top: 1px;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   transition: background-color 0.2s ease, transform 0.1s ease;
   box-shadow: 0 2px 4px rgba(58, 134, 255, 0.3);
 }
@@ -428,6 +449,7 @@ body {
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
 
 .modal-content h2 {
   margin-top: 0;
@@ -546,11 +568,11 @@ body {
   }
 
   .demande-form-container {
-    width: 100%;
-    height: auto;
+    width: 50%;
+    height: 50%;
     position: static;
     border-left: none;
-    border-top: 1px solid var(--border-color);
+    border-top: 200px solid var(--border-color);
     box-shadow: none;
   }
 

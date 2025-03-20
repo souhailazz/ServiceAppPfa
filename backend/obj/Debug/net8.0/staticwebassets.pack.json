@@ -45,8 +45,16 @@
       "PackagePath": "staticwebassets\\uploads\\9a3331ec-9aec-4d48-bbef-95e5ba68f267.png"
     },
     {
+      "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\9f45e963-84f2-4214-b1bb-bc44ccbd688c.jpg",
+      "PackagePath": "staticwebassets\\uploads\\9f45e963-84f2-4214-b1bb-bc44ccbd688c.jpg"
+    },
+    {
       "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\b2e465e9-71c3-4865-9293-7380255c4506.png",
       "PackagePath": "staticwebassets\\uploads\\b2e465e9-71c3-4865-9293-7380255c4506.png"
+    },
+    {
+      "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\c81395cb-031a-4d3f-bb5e-00ed9f166635.jpg",
+      "PackagePath": "staticwebassets\\uploads\\c81395cb-031a-4d3f-bb5e-00ed9f166635.jpg"
     },
     {
       "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\d35feebc-d8ca-45f0-a023-a84e0273d214.jpg",
@@ -55,6 +63,10 @@
     {
       "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\fe426cec-6525-4b05-b45b-74e22146d1e0.png",
       "PackagePath": "staticwebassets\\uploads\\fe426cec-6525-4b05-b45b-74e22146d1e0.png"
+    },
+    {
+      "Id": "C:\\Users\\dafal\\Documents\\GitHub\\ServiceAppPfa\\backend\\wwwroot\\uploads\\image.png",
+      "PackagePath": "staticwebassets\\uploads\\image.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",

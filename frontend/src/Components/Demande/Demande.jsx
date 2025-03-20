@@ -189,10 +189,13 @@ const Demande = () => {
 
   return (
     <div className="demande-container">
+      
       <div className="demande-grid">
+        
         {demandes.length > 0 ? (
           demandes.map((demande) => (
             <div key={demande.id} className="demande-card">
+            <div className="demande-public-title">  <h4>Demande publique</h4> </div>  
               <Link to={`/demande/${demande.id}`} className="demande-link">
                 <img 
                   src={demande.photoUrll && demande.photoUrll.length > 0 ? demande.photoUrll[0] : "/placeholder-image.jpg"} 
@@ -218,7 +221,7 @@ const Demande = () => {
 
       {/* New demand form */}
       <div className="demande-form-container">
-        <h2>Créer une nouvelle demande</h2>
+        <h2>Demande public</h2>
         <form onSubmit={handleSubmitDemande} className="demande-form">
           <div className="form-group">
             <label htmlFor="titre">Titre:<span className="required">*</span></label>
@@ -276,7 +279,7 @@ const Demande = () => {
             className="submit-button" 
             disabled={isLoading}
           >
-            {isLoading ? "Création en cours..." : "Créer la demande"}
+            {isLoading ? "Création en cours..." : "Poster ma demande"}
           </button>
           
           {submitMessage && (
