@@ -18,34 +18,34 @@ const Login = () => {
     setLoading(true);
     
     try {
-      const response = await axios.post('http://localhost:5207/api/Utilisateurs/login', {
-        Email: email,
-        MotDePasse: password
-      });
-      
-      // If login is successful
-      if (response.status === 200) {
-        sessionStorage.setItem('userId', response.data.UtilisateurId);
-        sessionStorage.setItem('userRole', response.data.Role);
+        const response = await axios.post('http://localhost:5207/api/Utilisateurs/login', {
+            Email: email,
+            MotDePasse: password
+        });
         
-        navigate('/HomePage');
-      }
+        if (response.status === 200) {
+          sessionStorage.setItem('userId', response.data.utilisateurId);
+          sessionStorage.setItem('userRole', response.data.role);
+          console.log('User ID from login:', response.data.utilisateurId);
+          
+            navigate('/HomePage');
+        }
     } catch (err) {
-      // Handle errors
-      if (err.response) {
-        // Server responded with an error status
-        setError(err.response.data || 'Email ou mot de passe incorrect.');
-      } else if (err.request) {
-        // Request was made but no response received
-        setError('Problème de connexion au serveur. Veuillez réessayer plus tard.');
-      } else {
-        // Something else happened
-        setError('Une erreur s\'est produite. Veuillez réessayer.');
-      }
+        // Handle errors
+        if (err.response) {
+            // Server responded with an error status
+            setError(err.response.data || 'Email ou mot de passe incorrect.');
+        } else if (err.request) {
+            // Request was made but no response received
+            setError('Problème de connexion au serveur. Veuillez réessayer plus tard.');
+        } else {
+            // Something else happened
+            setError('Une erreur s\'est produite. Veuillez réessayer.');
+        }
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   return (
     <div className="min-h-screen">

@@ -94,26 +94,34 @@ public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     return Ok(new { Message = "Utilisateur créé avec succès", UtilisateurId = utilisateur.Id, Role = utilisateur.Role });
 }
     // API pour la connexion de l'utilisateur
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+  [HttpPost("login")]
+public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+{
+    if (string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.MotDePasse))
     {
-        if (string.IsNullOrEmpty(loginDto.Email) || string.IsNullOrEmpty(loginDto.MotDePasse))
-        {
-            return BadRequest("Email et mot de passe sont requis.");
-        }
-
-        var utilisateur = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
-        if (utilisateur == null || utilisateur.MotDePasseHash != HashPassword(loginDto.MotDePasse))
-        {
-            return Unauthorized("Email ou mot de passe incorrect.");
-        }
-
-        // Stocker l'ID de l'utilisateur dans la session
-        _httpContextAccessor.HttpContext.Session.SetInt32("UtilisateurId", utilisateur.Id);
-
-        return Ok(new { Message = "Connexion réussie", UtilisateurId = utilisateur.Id, Role = utilisateur.Role });
+        Console.WriteLine("Login failed: Email or password is empty");
+        return BadRequest("Email et mot de passe sont requis.");
     }
 
+    var utilisateur = await _context.UtilisateurDB.FirstOrDefaultAsync(u => u.Email == loginDto.Email);
+    if (utilisateur == null)
+    {
+        Console.WriteLine($"Login failed: User with email {loginDto.Email} not found");
+        return Unauthorized("Email ou mot de passe incorrect.");
+    }
+    
+    if (utilisateur.MotDePasseHash != HashPassword(loginDto.MotDePasse))
+    {
+        Console.WriteLine($"Login failed: Password incorrect for user {loginDto.Email}");
+        return Unauthorized("Email ou mot de passe incorrect.");
+    }
+
+    // Stocker l'ID de l'utilisateur dans la session
+    _httpContextAccessor.HttpContext.Session.SetInt32("UtilisateurId", utilisateur.Id);
+    
+    Console.WriteLine($"Login successful: User ID {utilisateur.Id}, Role {utilisateur.Role}");
+    
+return Ok(new { Message = "Connexion réussie", UtilisateurId = utilisateur.Id, Role = utilisateur.Role });}
     // API pour récupérer l'utilisateur connecté
     [HttpGet("session-user")]
     public IActionResult GetSessionUser()

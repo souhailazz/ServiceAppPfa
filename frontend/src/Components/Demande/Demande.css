@@ -66,6 +66,245 @@ body {
   margin: 0 0 8px 0;
   color: var(--reddit-text);
 }
+/* Existing styles for the demande grid */
+.demande-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+}
+
+/* New container for the layout */
+.demande-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Styles for the new demand form */
+.demande-form-container {
+  width: 300px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-left: 1px solid #ddd;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+}
+
+.demande-form-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.demande-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.submit-message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.submit-message.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.submit-message.error {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+/* Login prompt styles */
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-button {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.login-button:hover {
+  background-color: #0b7dda;
+}
+
+/* Image placeholder */
+.demande-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+}
+
+/* Existing styles for comment modal */
+.comment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.comment-list {
+  margin: 20px 0;
+}
+
+.comment {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.comment span {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Existing styles for demande cards */
+.demande-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.demande-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.demande-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.demande-title {
+  padding: 10px;
+  margin: 0;
+  font-size: 18px;
+}
+
+.demande-description {
+  padding: 0 10px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.demande-location,
+.demande-date {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.demande-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.demande-like,
+.demande-comment {
+  background: none;
+  border: none;
+  color: #4267B2;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.demande-like:hover,
+.demande-comment:hover {
+  text-decoration: underline;
+}
 
 .demande-description {
   font-size: 14px;
