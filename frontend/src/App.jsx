@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <header>
           <nav>
-            <Link to="/Login">Test</Link>
+            <Link to="/Login">ALLoService</Link>
             <Link to="/signup">Register</Link>
             <Link to="/home">Accueil</Link>
             <Link to="/demande">Demande</Link>

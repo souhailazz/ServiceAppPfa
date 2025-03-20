@@ -1,107 +1,256 @@
-/* Reddit-inspired styling for Demande component */
-
 :root {
-  --reddit-orange: #ff4500;
-  --reddit-blue: #0079d3;
-  --reddit-light-gray: #f8f9fa;
-  --reddit-border: #edeff1;
-  --reddit-text: #1c1c1c;
-  --reddit-secondary-text: #7c7c7c;
-  --reddit-card-bg: #ffffff;
-  --reddit-modal-overlay: rgba(0, 0, 0, 0.5);
+  /* Enhanced color palette with more vibrant and harmonious colors */
+  --primary-color: #3a86ff; /* Vibrant blue */
+  --primary-hover: #2a75e0; /* Darker blue for hover states */
+  --secondary-color: #ff5a5f; /* Coral red */
+  --secondary-hover: #e54b50; /* Darker red for hover states */
+  --accent-color: #8338ec; /* Purple accent */
+  --success-color: #4ad295; /* Green for success states */
+  --success-hover: #3db986; /* Darker green for hover */
+  --text-color: #2d3748; /* Dark slate for main text */
+  --light-text: #4a5568; /* Medium slate for secondary text */
+  --lighter-text: #718096; /* Light slate for tertiary text */
+  --border-color: #e2e8f0; /* Light gray for borders */
+  --background-color: #ffffff; /* White background */
+  --light-background: #f8fafc; /* Very light gray background */
+  --card-background: #ffffff; /* White for cards */
+  --form-background: #f8fafc; /* Light gray for form */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  --radius: 8px; /* Border radius */
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
-  background-color: var(--reddit-light-gray);
-  color: var(--reddit-text);
+  background-color: var(--light-background);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 
-/* Main container */
-.demande-grid {
-  max-width: 800px;
+/* Main container layout - fixed to ensure proper alignment */
+.demande-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  min-height: calc(100vh - 60px); /* Account for header height */
+  position: relative; /* Establish positioning context */
+}
+
+/* Left side - posts grid */
+.demande-grid {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
+  padding: 24px;
+  margin-right: 350px; /* Make space for the fixed form */
 }
 
-/* Card styling */
+/* Right side - form - Fixed positioning improved */
+.demande-form-container {
+  width: 350px;
+  padding: 24px;
+  background-color: var(--form-background);
+  border-left: 1px solid var(--border-color);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow-y: auto;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+/* Card styling - enhanced with better shadows and transitions */
 .demande-card {
-  background-color: var(--reddit-card-bg);
-  border: 1px solid var(--reddit-border);
-  border-radius: 4px;
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .demande-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .demande-link {
   text-decoration: none;
   color: inherit;
   display: block;
-  padding: 12px;
 }
 
 .demande-image {
   width: 100%;
-  height: 300px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 4px 4px 0 0;
-  margin-bottom: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.demande-image:hover {
+  opacity: 0.9;
+}
+
+/* User info section - improved spacing and alignment */
+.demande-card .user-info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.demande-card .user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+  background-color: var(--light-background);
+}
+
+.demande-card .user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.demande-card .user-details {
+  flex: 1;
+}
+
+.demande-card .user-name {
+  font-weight: 600;
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-color);
 }
 
 .demande-title {
   font-size: 18px;
   font-weight: 600;
-  margin: 0 0 8px 0;
-  color: var(--reddit-text);
-}
-/* Existing styles for the demande grid */
-.demande-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  flex: 1;
+  margin: 0;
+  padding: 16px 16px 6px;
+  color: var(--text-color);
 }
 
-/* New container for the layout */
-.demande-container {
+.demande-description {
+  font-size: 14px;
+  margin: 0;
+  padding: 0 16px 12px;
+  color: var(--light-text);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.demande-location {
+  font-size: 13px;
+  color: var(--lighter-text);
+  padding: 0 16px 6px;
+  margin: 0;
   display: flex;
-  width: 100%;
+  align-items: center;
 }
 
-/* Styles for the new demand form */
-.demande-form-container {
-  width: 300px;
-  padding: 20px;
-  background-color: #f4f4f4;
-  border-left: 1px solid #ddd;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow-y: auto;
+.demande-location::before {
+  content: "📍";
+  margin-right: 6px;
 }
 
+.demande-budget {
+  font-size: 13px;
+  color: var(--accent-color);
+  font-weight: 500;
+  padding: 0 16px 16px;
+  margin: 0;
+}
+
+/* Card actions - improved with better hover effects */
+.demande-actions {
+  display: flex;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--light-background);
+  justify-content: space-between;
+}
+
+.demande-like,
+.demande-comment,
+.demande-recommend {
+  background: transparent;
+  border: none;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--light-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.demande-like:hover,
+.demande-comment:hover {
+  background-color: rgba(58, 134, 255, 0.1);
+  color: var(--primary-color);
+}
+
+.demande-recommend:hover {
+  background-color: rgba(131, 56, 236, 0.1);
+  color: var(--accent-color);
+}
+
+/* First response button - enhanced with better styling */
+.first-response {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.first-response-btn {
+  color: var(--secondary-color);
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+
+.first-response-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* Form styling - improved with better spacing and visual hierarchy */
 .demande-form-container h2 {
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 24px;
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
 }
 
 .demande-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
 .form-group {
@@ -110,318 +259,217 @@ body {
 }
 
 .form-group label {
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-color);
 }
 
 .form-group input,
 .form-group textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: white;
 }
 
 .form-group textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
-.submit-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+}
+
+/* Photo upload section - improved with better visual cues */
+.photo-upload-section {
+  margin-top: 18px;
+}
+
+.photo-upload-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--text-color);
+}
+
+.photo-upload-hint {
+  font-size: 12px;
+  color: var(--lighter-text);
+  margin-top: 6px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.photo-upload-box {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  font-weight: bold;
+  background-color: var(--light-background);
+  transition: all 0.2s ease;
+}
+
+.photo-upload-box:hover {
+  border-color: var(--primary-color);
+  background-color: rgba(58, 134, 255, 0.05);
+}
+
+.photo-upload-box::before {
+  content: "+";
+  font-size: 24px;
+  color: var(--lighter-text);
+}
+
+/* Submit button - enhanced with better styling and hover effects */
+.submit-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 16px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 4px rgba(58, 134, 255, 0.3);
 }
 
 .submit-button:hover {
-  background-color: #45a049;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(58, 134, 255, 0.4);
 }
 
-.submit-message {
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 4px;
-  text-align: center;
+.submit-button:active {
+  transform: translateY(0);
 }
 
-.submit-message.success {
-  background-color: #dff0d8;
-  color: #3c763d;
-  border: 1px solid #d6e9c6;
+/* Address section - improved with better visual hierarchy */
+.address-section {
+  margin-top: 18px;
+  padding: 18px 0;
+  border-top: 1px solid var(--border-color);
 }
 
-.submit-message.error {
-  background-color: #f2dede;
-  color: #a94442;
-  border: 1px solid #ebccd1;
-}
-
-/* Login prompt styles */
-.login-prompt {
+.address-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  text-align: center;
+  margin-bottom: 12px;
 }
 
-.login-button {
-  background-color: #2196F3;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 15px;
+.address-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-color);
 }
 
-.login-button:hover {
-  background-color: #0b7dda;
+.address-arrow {
+  color: var(--primary-color);
+  transition: transform 0.2s ease;
 }
 
-/* Image placeholder */
-.demande-image-placeholder {
-  width: 100%;
-  height: 200px;
-  background-color: #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #999;
+.address-header:hover .address-arrow {
+  transform: translateX(3px);
 }
 
-/* Existing styles for comment modal */
+/* Comment modal - improved with better styling and animations */
 .comment-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 80%;
+  background-color: var(--background-color);
+  width: 90%;
   max-width: 500px;
   max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.comment-list {
-  margin: 20px 0;
-}
-
-.comment {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.comment span {
-  font-size: 12px;
-  color: #888;
-}
-
-/* Existing styles for demande cards */
-.demande-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.demande-link {
-  text-decoration: none;
-  color: inherit;
-}
-
-.demande-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.demande-title {
-  padding: 10px;
-  margin: 0;
-  font-size: 18px;
-}
-
-.demande-description {
-  padding: 0 10px;
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.demande-location,
-.demande-date {
-  padding: 5px 10px;
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-}
-
-.demande-actions {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-}
-
-.demande-like,
-.demande-comment {
-  background: none;
-  border: none;
-  color: #4267B2;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.demande-like:hover,
-.demande-comment:hover {
-  text-decoration: underline;
-}
-
-.demande-description {
-  font-size: 14px;
-  margin: 0 0 10px 0;
-  color: var(--reddit-text);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.demande-location,
-.demande-date {
-  font-size: 12px;
-  color: var(--reddit-secondary-text);
-  margin: 4px 0;
-}
-
-/* Card actions */
-.demande-actions {
-  display: flex;
-  padding: 8px 12px;
-  border-top: 1px solid var(--reddit-border);
-  background-color: #f9f9f9;
-}
-
-.demande-like,
-.demande-comment {
-  background: transparent;
-  border: none;
-  padding: 6px 12px;
-  font-size: 14px;
-  color: var(--reddit-secondary-text);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.demande-like:hover,
-.demande-comment:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: var(--reddit-blue);
-}
-
-.demande-like::before {
-  content: "↑";
-  margin-right: 5px;
-}
-
-.demande-comment::before {
-  content: "💬";
-  margin-right: 5px;
-  font-size: 12px;
-}
-
-/* Comment modal */
-.comment-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--reddit-modal-overlay);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: var(--reddit-card-bg);
-  width: 90%;
-  max-width: 600px;
-  max-height: 80vh;
-  border-radius: 4px;
-  padding: 20px;
+  border-radius: var(--radius);
+  padding: 24px;
   position: relative;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-content h2 {
   margin-top: 0;
-  color: var(--reddit-text);
-  border-bottom: 1px solid var(--reddit-border);
-  padding-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  font-size: 18px;
 }
 
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 16px;
+  right: 16px;
   background: transparent;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
-  color: var(--reddit-secondary-text);
+  color: var(--light-text);
+  transition: color 0.2s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .close-btn:hover {
-  color: var(--reddit-text);
+  color: var(--text-color);
+  background-color: var(--light-background);
 }
 
-/* Comment list */
 .comment-list {
   overflow-y: auto;
   max-height: 50vh;
-  margin-bottom: 15px;
-  padding-right: 5px;
+  margin-bottom: 16px;
+  padding-right: 6px;
 }
 
 .comment {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--reddit-border);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .comment:last-child {
@@ -429,70 +477,122 @@ body {
 }
 
 .comment strong {
-  color: var(--reddit-blue);
+  color: var(--text-color);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .comment p {
-  margin: 5px 0;
+  margin: 6px 0;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .comment span {
   font-size: 12px;
-  color: var(--reddit-secondary-text);
+  color: var(--lighter-text);
   display: block;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
-/* Comment input */
 .modal-content textarea {
   width: 100%;
-  min-height: 80px;
-  padding: 10px;
-  border: 1px solid var(--reddit-border);
-  border-radius: 4px;
-  margin-bottom: 10px;
+  min-height: 90px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
   resize: vertical;
   font-family: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal-content textarea:focus {
   outline: none;
-  border-color: var(--reddit-blue);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
 }
 
 .modal-content button {
   align-self: flex-end;
-  background-color: var(--reddit-blue);
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
+  border-radius: var(--radius);
+  padding: 10px 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(58, 134, 255, 0.3);
 }
 
 .modal-content button:hover {
-  background-color: #005fa3;
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(58, 134, 255, 0.4);
 }
 
-/* Responsive adjustments */
-@media (max-width: 850px) {
+/* Responsive adjustments - improved for better mobile experience */
+@media (max-width: 1024px) {
+  .demande-container {
+    flex-direction: column;
+  }
+
   .demande-grid {
-    max-width: 95%;
+    margin-right: 0;
+    padding: 16px;
+  }
+
+  .demande-form-container {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    box-shadow: none;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  
+  .demande-card {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
+
 @media (max-width: 768px) {
-  .demande-grid {
-    grid-template-columns: 1fr;
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .modal-content {
-    width: 95%;
-    max-height: 90vh;
+  
+  .demande-actions {
+    flex-wrap: wrap;
   }
 }
 
+@media (max-width: 480px) {
+  .demande-grid {
+    padding: 12px;
+  }
+
+  .demande-form-container {
+    padding: 16px;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .demande-title {
+    font-size: 16px;
+  }
+  
+  .submit-button {
+    padding: 12px;
+  }
+}

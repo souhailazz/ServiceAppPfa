@@ -1,177 +1,333 @@
 :root {
-    --primary-red: #e63946;
-    --dark-red: #c1121f;
-    --light-red: #ffccd5;
-    --white: #ffffff;
-    --dark-gray: #333333;
-    --light-gray: #f8f9fa;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
-  }
-  
-  /* Header Styles */
-  header {
-    background-color: var(--white);
-    box-shadow: var(--box-shadow);
-    position: relative;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 4rem;
-  }
-  
-  /* Navigation Styles */
+  --primary-red: #e63946;
+  --dark-red: #c1121f;
+  --light-red: #ffccd5;
+  --white: #ffffff;
+  --dark-gray: #333333;
+  --light-gray: #f8f9fa;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* App container */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header and Navigation */
+header {
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: var(--transition);
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+nav a {
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+/* Link hover animation */
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-red);
+  transition: var(--transition);
+}
+
+nav a:hover {
+  color: var(--primary-red);
+  transform: translateY(-2px);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Active link styling - you'll need to add the 'active' class in your React code */
+nav a.active {
+  color: var(--primary-red);
+}
+
+nav a.active::after {
+  width: 100%;
+}
+
+/* First link styling (for the Test/Login link) */
+nav a:first-child {
+  margin-right: auto;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-red);
+}
+
+nav a:first-child:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   nav {
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 1rem;
+  }
+
+  nav a {
+    margin: 0.25rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  nav a:first-child {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
     justify-content: center;
   }
-  
+
   nav a {
-    color: var(--dark-gray);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    margin: 0 0.5rem;
-    position: relative;
-    transition: var(--transition);
+    flex-basis: calc(50% - 1rem);
+    text-align: center;
+    margin: 0.25rem;
   }
-  
-  /* Desktop Link Hover Animation */
+
   nav a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-red);
-    transition: var(--transition);
+    bottom: -2px;
   }
-  
-  nav a:hover {
-    color: var(--primary-red);
+}
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+/* Logo */
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-red);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.logo a:hover {
+  opacity: 0.9;
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-nav a {
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+/* Desktop Link Hover Animation */
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-red);
+  transition: var(--transition);
+}
+
+.desktop-nav a:hover {
+  color: var(--primary-red);
+  transform: scale(1.05);
+}
+
+.desktop-nav a:hover::after {
+  width: 100%;
+}
+
+/* Active Link Styling */
+.active-link {
+  color: var(--primary-red) !important;
+  position: relative;
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  height: 2px;
+  background-color: var(--primary-red);
+}
+
+/* Mobile Menu Button */
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background-color: var(--dark-gray);
+  transition: var(--transition);
+}
+
+.menu-icon {
+  top: 13px;
+}
+
+.menu-icon::before {
+  content: "";
+  top: -8px;
+}
+
+.menu-icon::after {
+  content: "";
+  top: 8px;
+}
+
+/* Menu button animation */
+.menu-button.active .menu-icon {
+  background-color: transparent;
+}
+
+.menu-button.active .menu-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+  background-color: var(--primary-red);
+}
+
+.menu-button.active .menu-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+  background-color: var(--primary-red);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  background-color: var(--white);
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.mobile-menu.active {
+  display: block;
+  padding: 1rem;
+  max-height: 500px;
+  animation: slideDown 0.3s ease forwards;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu a {
+  display: block;
+  color: var(--dark-gray);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+  transition: var(--transition);
+}
+
+.mobile-menu a:hover {
+  color: var(--primary-red);
+  background-color: var(--light-red);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  nav a:hover::after {
-    width: 100%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Additional hover effect - subtle scale */
-  nav a:hover {
-    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
   }
-  
-  /* Mobile Menu Button */
+
   .menu-button {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--dark-gray);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  
-  .menu-button:hover {
-    color: var(--primary-red);
-  }
-  
-  /* Mobile Menu */
-  .mobile-menu {
-    display: none;
-    background-color: var(--white);
-    padding: 1rem;
-    box-shadow: var(--box-shadow);
-  }
-  
-  .mobile-menu a {
     display: block;
-    color: var(--dark-gray);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.75rem 1rem;
-    margin: 0.5rem 0;
-    border-radius: 0.25rem;
-    transition: var(--transition);
   }
-  
-  .mobile-menu a:hover {
-    color: var(--primary-red);
-    background-color: var(--light-red);
-    transform: translateY(-3px);
-    box-shadow: var(--box-shadow);
-  }
-  
-  /* Show mobile menu when active */
-  .mobile-menu.active {
-    display: block;
-    animation: slideDown 0.3s ease forwards;
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Pulse animation for active link */
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.4);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(230, 57, 70, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
-    }
-  }
-  
-  .active-link {
-    color: var(--primary-red);
-    position: relative;
-  }
-  
-  .active-link::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--primary-red);
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    nav {
-      display: none;
-    }
-  
-    .menu-button {
-      display: block;
-      position: absolute;
-      right: 1rem;
-    }
-  
-    .header-content {
-      justify-content: space-between;
-    }
-  }
-  
-  
+}
+
