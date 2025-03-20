@@ -32,9 +32,6 @@ function App() {
           <Route path="/demande/:id" element={<DemandeDetails />} />
           <Route path="/Profile" element={<Profile />} /> 
  
-
-
-          {/* Ajout d'un fallback pour les routes non trouvées */}
           <Route path="*" element={<h2>Page non trouvée</h2>} />
         </Routes>
       </div>

@@ -118,7 +118,6 @@ const Demande = () => {
     setSubmitError(false);
     setDebugInfo(null);
     
-    // Get the userId from sessionStorage right when submitting
     console.log('user id =', userId);
     if (!userId) {
       setSubmitMessage("Veuillez vous connecter pour créer une demande");
