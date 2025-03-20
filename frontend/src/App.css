@@ -44,7 +44,24 @@ nav {
   padding: 0 1.5rem;
   height: 4rem;
   display: flex;
+  justify-content: space-between; /* Pour espacer les sections à gauche, centre, et droite */
   align-items: center;
+}
+
+nav .logo {
+  flex: 1; /* Occupe une portion de l'espace à gauche */
+}
+
+nav .nav-links {
+  display: flex;
+  flex: 2; /* Les liens sont centrés */
+  justify-content: center;
+  gap: 1.5rem; /* Espacement entre les liens */
+}
+
+nav .profile {
+  flex: 1; /* Profil à droite */
+  display: flex;
   justify-content: flex-end;
 }
 
@@ -53,12 +70,9 @@ nav a {
   text-decoration: none;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  position: relative;
   transition: var(--transition);
 }
 
-/* Link hover animation */
 nav a::after {
   content: "";
   position: absolute;
@@ -79,7 +93,6 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* Active link styling - you'll need to add the 'active' class in your React code */
 nav a.active {
   color: var(--primary-red);
 }
@@ -88,36 +101,32 @@ nav a.active::after {
   width: 100%;
 }
 
-/* First link styling (for the Test/Login link) */
-nav a:first-child {
-  margin-right: auto;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--primary-red);
-}
-
-nav a:first-child:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
+/* Logo styling */
+nav .logo img {
+  height: 35px;
+  width: auto;
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
   nav {
     flex-wrap: wrap;
-    height: auto;
     padding: 1rem;
   }
 
-  nav a {
-    margin: 0.25rem;
-    padding: 0.5rem;
-    font-size: 0.9rem;
+  nav .logo {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 1rem;
   }
 
-  nav a:first-child {
+  nav .nav-links {
     flex-basis: 100%;
-    margin-bottom: 0.5rem;
+    justify-content: space-around;
+  }
+
+  nav .profile {
+    flex-basis: 100%;
     text-align: center;
   }
 }

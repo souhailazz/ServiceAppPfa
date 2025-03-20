@@ -1,6 +1,6 @@
 :root {
   /* Enhanced color palette with more vibrant and harmonious colors */
-  --primary-color: #3a86ff; /* Vibrant blue */
+  --primary-color: #e63946; /* Vibrant blue */
   --primary-hover: #2a75e0; /* Darker blue for hover states */
   --secondary-color: #ff5a5f; /* Coral red */
   --secondary-hover: #e54b50; /* Darker red for hover states */
@@ -33,38 +33,30 @@ body {
 /* Main container layout - fixed to ensure proper alignment */
 .demande-container {
   display: flex;
-  width: 100%;
+  gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: calc(100vh - 60px); /* Account for header height */
-  position: relative; /* Establish positioning context */
+  padding: 20px;/* Establish positioning context */
 }
 
 /* Left side - posts grid */
 .demande-grid {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 24px;
-  margin-right: 350px; /* Make space for the fixed form */
+  min-width: 0; /* Make space for the fixed form */
 }
 
 /* Right side - form - Fixed positioning improved */
 .demande-form-container {
   width: 350px;
   padding: 24px;
+  height: 65vh;
   background-color: white;
-  border-left: 1px solid var(--border-color);
-  height: 75vh;
-  position: fixed;
-  top: 87px;
-  right: 350px;
-  overflow-y: auto;
-  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.05);
-  z-index: 10;
- 
+  border: 1px solid var(--border-color);
   border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: fit-content; 
+  position: sticky; 
+  top: 80px; 
 }
 
 /* Card styling - enhanced with better shadows and transitions */

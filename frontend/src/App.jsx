@@ -11,19 +11,26 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header>
-          <nav>
-          <Link to="/home">
-  <img src={logo} alt="ALLoService Logo" style={{ height: "40px" }} />
-</Link>
-            <Link to="/signup">Register</Link>
-            <Link to="/home">Accueil</Link>
-            <Link to="/demande">Demande</Link>
-            <Link to="/professionnel">Professionnel</Link>
-            <Link to="/Profile">Profile</Link>
+      <header>
+  <nav>
+    <div className="logo">
+      <Link to="/home">
+        <img src={logo} alt="ALLoService Logo" />
+      </Link>
+    </div>
 
-          </nav>
-        </header>
+    <div className="nav-links">
+      <Link to="/signup">Register</Link>
+      <Link to="/home">Accueil</Link>
+      <Link to="/demande">Demande</Link>
+      <Link to="/professionnel">Professionnel</Link>
+    </div>
+
+    <div className="profile">
+      <Link to="/Profile">Profile</Link>
+    </div>
+  </nav>
+</header>
 
         <Routes>
           <Route path="/" element={<Navigate to="/Login" />} />
