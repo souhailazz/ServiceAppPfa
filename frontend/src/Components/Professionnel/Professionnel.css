@@ -1,0 +1,253 @@
+/* Main container styles */
+.professionnels-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Metier box styles */
+  .metier-box {
+    margin-bottom: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .metier-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    padding-left: 10px;
+  }
+  
+  /* Professionals grid */
+  .professionnels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Professional card styles */
+  .professionnel-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+  }
+  
+  .professionnel-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .professionnel-image {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .professionnel-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    color: #666;
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .professionnel-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .professionnel-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .location {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 10px 0;
+  }
+  
+  /* Rating styles */
+  .rating {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .star {
+    color: #ddd;
+    font-size: 18px;
+    margin-right: 2px;
+  }
+  
+  .star.full, .star.half {
+    color: #ffb400;
+  }
+  
+  .star.half {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .rating-value {
+    margin-left: 5px;
+    font-weight: 600;
+    color: #666;
+  }
+  
+  /* Button styles */
+  .show-all-button {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .show-all-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Loading and error states */
+  .loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .error {
+    color: #e53935;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .professionnels-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .professionnels-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-title {
+      font-size: 20px;
+    }
+    
+    .metier-title {
+      font-size: 18px;
+    }
+  }
+  
+  /* Additional styles to match the image */
+  .particulier-tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .distance-info {
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+  }
+  
+  .online-status {
+    font-size: 12px;
+    color: #4caf50;
+    margin-top: 3px;
+  }
+  
+  /* Add this to your existing CSS to better match the image */
+  .professionnel-card {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    padding: 10px;
+  }
+  
+  .professionnel-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .professionnel-image img {
+    border-radius: 50%;
+  }
+  
+  .professionnel-info {
+    padding: 0;
+  }
+  
+  .metier-box {
+    border: none;
+    box-shadow: none;
+  }
+  
+  .professionnels-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .gallery-images {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    margin-top: 10px;
+    height: 80px;
+  }
+  
+  .gallery-image {
+    height: 100%;
+    min-width: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+  }

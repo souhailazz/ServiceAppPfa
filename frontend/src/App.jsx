@@ -7,6 +7,7 @@ import DemandeDetails from "./Components/DemandeDetails/DemandeDetails";
 import Profile from './Components/Profile/Profile'
 import Demande from './Components/Demande/Demande'
 import logo from "./assets/Images/image.png";
+import Professionnel from './Components/Professionnel/Professionnel'
 function App() {
   return (
     <Router>
@@ -40,6 +41,8 @@ function App() {
           <Route path="/demande" element={<Demande />} />
           <Route path="/demande/:id" element={<DemandeDetails />} />
           <Route path="/Profile" element={<Profile />} /> 
+          <Route path="/Professionnel" element={<Professionnel />} /> 
+
  
           <Route path="*" element={<h2>Page non trouvée</h2>} />
         </Routes>
