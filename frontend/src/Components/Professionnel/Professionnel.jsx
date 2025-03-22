@@ -13,8 +13,6 @@ const Professionnel = () => {
     const [allMetiers, setAllMetiers] = useState([]);
     const [originalData, setOriginalData] = useState([]);
     const navigate = useNavigate();
-
-    // List of available métiers for filter dropdown
     const metiersList = [
         "Plombier", "Électricien", "Mécanicien", "Jardinier", 
         "Menuisier", "Peintre", "Tolier"
@@ -271,7 +269,6 @@ const Professionnel = () => {
     );
 };
 
-// Helper function to render stars based on rating
 const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);

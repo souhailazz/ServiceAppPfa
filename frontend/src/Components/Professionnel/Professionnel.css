@@ -1,71 +1,153 @@
-/* Main container styles */
+/* Professionnel.css - Elegant and minimalistic styling with hover animations */
+
+/* Base styles and resets */
 .professionnels-container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
   }
   
   .page-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  /* Filters section */
+  .filters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .filter-group label {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .filter-group select {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+  }
+  
+  .filter-group select:hover {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+  }
+  
+  .filter-group select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  }
+  
+  .reset-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .reset-button:hover {
+    background-color: #e9ecef;
     color: #333;
   }
   
-  /* Metier box styles */
+  /* Métier sections */
   .metier-box {
-    margin-bottom: 40px;
-    background-color: #fff;
-    border-radius: 8px;
+    margin-bottom: 3rem;
+    border-radius: 12px;
     overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .metier-box:hover {
+    transform: translateY(-5px);
   }
   
   .metier-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #333;
-    padding-left: 10px;
+    padding: 1.5rem;
+    margin: 0;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 1px solid #eaeaea;
   }
   
-  /* Professionals grid - UPDATED to horizontal layout */
+  /* Professionals grid */
   .professionnels-grid {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem;
   }
   
-  /* Professional card styles */
+  /* Professional cards */
   .professionnel-card {
     display: flex;
-    flex-direction: column;
-    background-color: #fff;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    min-width: 300px;
-    max-width: 300px;
-    flex: 0 0 auto;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    height: 100px;
   }
   
   .professionnel-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: #f8f9fa;
   }
   
   .professionnel-image {
-    height: 180px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     overflow: hidden;
-    position: relative;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+  }
+  
+  .professionnel-card:hover .professionnel-image {
+    border-color: #3498db;
   }
   
   .professionnel-image img {
@@ -78,470 +160,125 @@
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: #e0e0e0;
-    color: #666;
-    font-size: 36px;
-    font-weight: bold;
+    align-items: center;
+    background-color: #3498db;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
   
   .professionnel-info {
-    padding: 15px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    flex: 1;
+    min-width: 0;
   }
   
   .professionnel-info h3 {
-    margin: 0 0 8px 0;
-    font-size: 16px;
+    margin: 0 0 0.25rem 0;
+    font-size: 1rem;
     font-weight: 600;
-    color: #333;
+    color: #2c3e50;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .location {
-    font-size: 14px;
-    color: #666;
-    margin: 0 0 10px 0;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #6c757d;
   }
   
-  /* Rating styles */
+  /* Ratings */
   .rating {
     display: flex;
     align-items: center;
-    margin-top: auto;
   }
   
   .star {
     color: #ddd;
-    font-size: 18px;
+    font-size: 1rem;
     margin-right: 2px;
+    transition: transform 0.2s ease;
+  }
+  
+  .professionnel-card:hover .star {
+    transform: scale(1.1);
   }
   
   .star.full, .star.half {
-    color: #ffb400;
-  }
-  
-  .star.half {
-    position: relative;
-    overflow: hidden;
+    color: #f1c40f;
   }
   
   .rating-value {
-    margin-left: 5px;
+    margin-left: 0.5rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #666;
+    color: #6c757d;
   }
   
-  /* Button styles */
+  /* Show all button */
   .show-all-button {
     display: block;
-    width: fit-content;
-    margin: 10px auto 20px;
-    padding: 10px 20px;
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    font-size: 14px;
+    margin: 0 auto 1.5rem;
+    padding: 0.75rem 2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
   }
   
   .show-all-button:hover {
-    background-color: #f5f5f5;
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
   }
   
   /* Loading and error states */
-  .loading, .error {
+  .loading, .error, .no-results {
+    padding: 2rem;
     text-align: center;
-    padding: 40px;
-    font-size: 16px;
-    color: #666;
-  }
-  
-  .error {
-    color: #e53935;
-  }
-  
-  /* Additional styles to match the image */
-  .particulier-tag {
-    display: inline-block;
-    background-color: #f0f0f0;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    color: #666;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1;
-  }
-  
-  .distance-info {
-    font-size: 12px;
-    color: #777;
-    margin-top: 5px;
-  }
-  
-  .online-status {
-    font-size: 12px;
-    color: #4caf50;
-    margin-top: 3px;
-  }
-  
-  /* Gallery images section */
-  .gallery-images {
-    display: flex;
-    overflow-x: auto;
-    gap: 5px;
-    margin-top: 10px;
-    height: 80px;
-    scrollbar-width: none; /* Firefox */
-  }
-  
-  .gallery-images::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
-  }
-  /* Professionnel.css */
-.professionnels-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.page-title {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #333;
-}
-
-/* Filter styles */
-.filters-container {
-    background-color: #f0f8ff;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 200px;
-}
-
-.filter-group label {
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #555;
-}
-
-.filter-group select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: white;
-}
-
-.filter-buttons {
-    display: flex;
-    gap: 10px;
-    align-items: flex-end;
-}
-
-.filter-button, .reset-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-.filter-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.filter-button:hover {
-    background-color: #0056b3;
-}
-
-.reset-button {
-    background-color: #f8f9fa;
-    color: #555;
-    border: 1px solid #ddd;
-}
-
-.reset-button:hover {
-    background-color: #e9ecef;
-}
-
-/* Métier box styles */
-.metier-box {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.metier-title {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color: #007bff;
-}
-
-.professionnels-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.professionnel-card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
-}
-
-.professionnel-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.professionnel-image {
-    width: 100%;
-    height: 180px;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 15px;
-}
-
-.professionnel-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.placeholder-image {
-    width: 100%;
-    height: 100%;
-    background-color: #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.placeholder-image span {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #999;
-}
-
-.professionnel-info h3 {
-    margin: 0 0 8px 0;
+    color: #6c757d;
     font-size: 1.1rem;
-}
-
-.location {
-    color: #777;
-    margin: 0 0 10px 0;
-    display: flex;
-    align-items: center;
-}
-
-.location::before {
-    content: "📍";
-    margin-right: 5px;
-}
-
-.rating {
-    display: flex;
-    align-items: center;
-}
-
-.star {
-    color: #ffc107;
-    font-size: 1.2rem;
-    margin-right: 2px;
-}
-
-.star.empty {
-    color: #e0e0e0;
-}
-
-.star.half {
-    position: relative;
-    color: #e0e0e0;
-}
-
-.star.half::before {
-    content: "★";
-    position: absolute;
-    color: #ffc107;
-    width: 50%;
-    overflow: hidden;
-}
-
-.rating-value {
-    margin-left: 5px;
-    font-weight: bold;
-}
-
-.show-all-button {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.show-all-button:hover {
-    background-color: #0056b3;
-}
-
-.loading, .error {
-    text-align: center;
-    margin-top: 50px;
-    font-size: 1.2rem;
-    color: #666;
-}
-
-.error {
-    color: #d9534f;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .filters-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .filter-group {
-        width: 100%;
-    }
-    
-    .filter-buttons {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
-    .professionnels-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .professionnels-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
-    
-    .filter-button, .reset-button {
-        width: 100%;
-    }
-}
+  }
   
-  .gallery-image {
-    height: 100%;
-    min-width: 120px;
-    object-fit: cover;
-    border-radius: 4px;
+  .loading.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
   }
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
+    .professionnels-container {
+      padding: 1rem;
+    }
+    
+    .filters-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .filter-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .filter-group select {
+      width: 100%;
+    }
+    
     .professionnels-grid {
-      padding: 5px;
+      grid-template-columns: 1fr;
     }
-    
-    .professionnel-card {
-      min-width: 250px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .professionnel-card {
-      min-width: 220px;
-    }
-    
-    .page-title {
-      font-size: 20px;
-    }
-    
-    .metier-title {
-      font-size: 18px;
-    }
-  }
-  
-  /* Navigation arrows for horizontal scrolling (optional) */
-  .scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 2;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .scroll-arrow.left {
-    left: 10px;
-  }
-  
-  .scroll-arrow.right {
-    right: 10px;
-  }
-  
-  /* If you want to match the exact layout in the image with horizontal cards */
-  .professionnel-card-horizontal {
-    display: flex;
-    flex-direction: row;
-    padding: 15px;
-    min-width: 300px;
-    max-width: 300px;
-    height: auto;
-  }
-  
-  .professionnel-card-horizontal .professionnel-image {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-right: 15px;
-    flex-shrink: 0;
-  }
-  
-  .professionnel-card-horizontal .professionnel-image img {
-    border-radius: 50%;
-  }
-  
-  .professionnel-card-horizontal .professionnel-info {
-    padding: 0;
   }
