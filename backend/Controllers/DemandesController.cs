@@ -138,29 +138,38 @@ public class DemandesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetDemandeById(int id)
-    {
-        var demande = await _context.DemandeDB
-            .Include(d => d.Photos)
-            .Where(d => d.Id == id)
-            .Select(d => new
-            {
-                d.Id,
-                d.Titre,
-                d.Description,
-                d.Ville,
-                d.DatePublication,
-                photoUrll = d.Photos.Select(p => p.Url).ToList()
-            })
-            .FirstOrDefaultAsync();
-
-        if (demande == null)
+public async Task<IActionResult> GetDemandeById(int id)
+{
+    var demande = await _context.DemandeDB
+        .Include(d => d.Photos)
+        .Include(d => d.Client) // Inclure le client
+        .ThenInclude(c => c.Utilisateur) // Inclure les infos de l'utilisateur du client
+        .Where(d => d.Id == id)
+        .Select(d => new
         {
-            return NotFound("Demande non trouvée.");
-        }
+            d.Id,
+            d.Titre,
+            d.Description,
+            d.Ville,
+            d.DatePublication,
+            photoUrls = d.Photos.Select(p => p.Url).ToList(),
+            Utilisateur = new
+            {
+                d.Client.Utilisateur.Nom,
+                d.Client.Utilisateur.Prenom,
+                d.Client.Utilisateur.Telephone,
+                d.Client.Utilisateur.Ville
+            }
+        })
+        .FirstOrDefaultAsync();
 
-        return Ok(demande);
+    if (demande == null)
+    {
+        return NotFound("Demande non trouvée.");
     }
+
+    return Ok(demande);
+}
   [HttpDelete("{id}")]
 public async Task<IActionResult> DeleteDemande(int id)
 {
