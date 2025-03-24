@@ -12,9 +12,9 @@ const DemandeDetails = () => {
     fetch(`${API_URL}/api/Demandes/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        // Apply the same URL transformation as in Demande.jsx
-        if (data.photoUrll) {
-          data.photoUrll = data.photoUrll.map((url) =>
+        // Corrige la transformation des URLs des images
+        if (data.photoUrls) {
+          data.photoUrls = data.photoUrls.map((url) =>
             url.startsWith("http") ? url : `${API_URL}${url}`
           );
         }
@@ -28,28 +28,31 @@ const DemandeDetails = () => {
   return (
     <div className="demande-details">
       <h1>{demande.titre}</h1>
-      
-      {/* Image gallery */}
+
+      {/* Galerie d'images */}
       <div className="demande-images-gallery">
-        {demande.photoUrll && demande.photoUrll.length > 0 ? (
-          demande.photoUrll.map((photoUrl, index) => (
-            <img 
+        {demande.photoUrls && demande.photoUrls.length > 0 ? (
+          demande.photoUrls.map((photoUrl, index) => (
+            <img
               key={index}
-              src={photoUrl}
+              src={photoUrl} // Plus besoin d'ajouter `API_URL`, il est déjà ajouté dans useEffect
               alt={`${demande.titre} - image ${index + 1}`}
               className="demande-detail-image"
-              onError={(e) => {e.target.onerror = null; e.target.src = "/placeholder-image.jpg"}}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/placeholder-image.jpg";
+              }}
             />
           ))
         ) : (
-          <img 
+          <img
             src="/placeholder-image.jpg"
             alt="Pas d'image disponible"
             className="demande-detail-image"
           />
         )}
       </div>
-      
+
       <p>{demande.description}</p>
       <p><strong>Ville:</strong> {demande.ville}</p>
       <p><strong>Date:</strong> {new Date(demande.datePublication).toLocaleString()}</p>

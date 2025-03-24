@@ -327,8 +327,8 @@ const Professionnel = () => {
                           <div className="professionnel-image">
                             {pro.photoUrl ? (
                               <img
-                                src={pro.photoUrl || "/placeholder.svg"}
-                                alt={`${pro.prenom || ""} ${pro.nom || ""}`}
+                              src={`http://localhost:5207${pro.photoUrl || "/placeholder.svg"}`}
+                              alt={`${pro.prenom || ""} ${pro.nom || ""}`}
                               />
                             ) : (
                               <div className="placeholder-image">
