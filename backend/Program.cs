@@ -10,7 +10,14 @@ builder.Configuration.AddEnvironmentVariables();
 
 var dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost"; // Default à "localhost" si non défini
 
-var connectionString = $"Server={dbServer};Database=SiteDB;Trusted_Connection=True;TrustServerCertificate=True";
+string connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") ?? 
+    "Server=SiteDBe.mssql.somee.com;" +
+    "Database=SiteDBe;" +
+    "User Id=PFA_SQLLogin_1;" +
+    "Password=pcn2vjyfap;" +
+    "TrustServerCertificate=True;" +
+    "Encrypt=True;" +
+    "MultipleActiveResultSets=True";
 
 builder.Services.AddControllers();
 
