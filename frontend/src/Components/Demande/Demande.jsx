@@ -204,7 +204,11 @@ const Demande = () => {
                   onError={(e) => {e.target.onerror = null; e.target.src = "/placeholder-image.jpg"}}
                 />
                 <h2 className="demande-title">{demande.titre}</h2>
-                <p className="demande-description">{demande.description}</p>
+                <p className="demande-description">
+  {demande.description.length > 200
+    ? demande.description.slice(0, 200) + '...'
+    : demande.description}
+</p>
                 <p className="demande-location">{demande.ville}</p>
                 <p className="demande-date">{new Date(demande.datePublication).toLocaleString()}</p>
               </Link>
