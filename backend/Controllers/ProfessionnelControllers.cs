@@ -81,7 +81,7 @@ public async Task<IActionResult> GetProfessionnel(int id)
 {
 
     var professionnel = await _context.ProfessionnelDB
-        .Where(p => p.UtilisateurId == id)
+        .Where(p => p.Id == id)
         .Select(p => new 
         {
             p.Id,
@@ -120,5 +120,49 @@ public async Task<IActionResult> GetProfessionnel(int id)
 
     return Ok(professionnel);
 }
+[HttpPost("ajouter-photo/{professionnelId}")]
+public async Task<IActionResult> AjouterPhoto(int professionnelId, IFormFile file)
+{
+    // Vérifier si le professionnel existe
+    var professionnel = await _context.ProfessionnelDB.FindAsync(professionnelId);
+    if (professionnel == null)
+    {
+        return NotFound("Professionnel non trouvé.");
+    }
 
+    // Vérifier si le fichier est valide
+    if (file == null || file.Length == 0)
+    {
+        return BadRequest("Aucun fichier sélectionné.");
+    }
+
+    // Générer un nom de fichier unique pour éviter les conflits
+    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", fileName);
+
+    // Assurez-vous que le répertoire existe
+    var directory = Path.GetDirectoryName(filePath);
+    if (!Directory.Exists(directory))
+    {
+        Directory.CreateDirectory(directory);
+    }
+
+    // Sauvegarder le fichier sur le serveur
+    using (var stream = new FileStream(filePath, FileMode.Create))
+    {
+        await file.CopyToAsync(stream);
+    }
+
+    // Ajouter l'URL de la photo dans la base de données
+    var photo = new Photos
+    {
+        ProfessionnelId = professionnelId,
+        Url = $"/uploads/{fileName}" // L'URL de la photo que l'on peut utiliser dans l'API
+    };
+
+    _context.PhotoDB.Add(photo);
+    await _context.SaveChangesAsync();
+
+    return Ok(new { Message = "Photo ajoutée avec succès.", PhotoUrl = photo.Url });
+}
 }

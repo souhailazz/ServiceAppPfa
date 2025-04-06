@@ -1,0 +1,253 @@
+/* Main container */
+.professionnel-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: #333;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .professionnel-details {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+/* Header section */
+.header {
+  grid-column: 1 / -1;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.photo-profil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.photo-profil img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nom-prenom {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+}
+
+.metier {
+  font-size: 1.1rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.dispo-badge {
+  margin-left: auto;
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* Tabs navigation */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.tabs button {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tabs button:hover {
+  color: #4a5568;
+}
+
+.tabs button.active {
+  color: #3182ce;
+  font-weight: 600;
+}
+
+.tabs button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #3182ce;
+  border-radius: 3px 3px 0 0;
+}
+
+/* Content sections */
+.sections {
+  grid-column: 1 / 2;
+}
+
+/* Cards */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #edf2f7;
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+/* Photo gallery */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.realisation-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.realisation-photo:hover {
+  transform: scale(1.02);
+}
+
+/* Evaluations */
+.evaluations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.evaluation {
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border-left: 4px solid #3182ce;
+}
+
+.evaluation strong {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.eval-note {
+  margin: 0.5rem 0;
+  font-weight: 600;
+  color: #3182ce;
+}
+
+.eval-date {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+/* Side section */
+.side-section {
+  grid-column: 2 / 3;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #edf2f7;
+}
+
+.side-section p {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.side-section p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.side-section strong {
+  font-weight: 600;
+  color: #4a5568;
+  margin-right: 0.5rem;
+}
+
+/* Main section */
+.main-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .professionnel-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .sections, .side-section {
+    grid-column: 1 / -1;
+  }
+  
+  .header-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .dispo-badge {
+    margin: 1rem 0 0 0;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
