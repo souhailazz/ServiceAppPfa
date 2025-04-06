@@ -79,8 +79,9 @@ public async Task<IActionResult> GetProfessionnelsParMetier(string metier, strin
 [HttpGet("professionnel/{id}")]
 public async Task<IActionResult> GetProfessionnel(int id)
 {
+
     var professionnel = await _context.ProfessionnelDB
-        .Where(p => p.Id == id)
+        .Where(p => p.UtilisateurId == id)
         .Select(p => new 
         {
             p.Id,
