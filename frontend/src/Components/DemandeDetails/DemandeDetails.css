@@ -1,177 +1,204 @@
-/* Reddit-inspired styling for DemandeDetails component */
 
-:root {
-    --reddit-orange: #ff4500;
-    --reddit-blue: #0079d3;
-    --reddit-light-gray: #f8f9fa;
-    --reddit-border: #edeff1;
-    --reddit-text: #1c1c1c;
-    --reddit-secondary-text: #7c7c7c;
-    --reddit-card-bg: #ffffff;
-  }
-  .demande-images-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-    margin: 20px 0;
-  }
-  
-  .demande-detail-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-    background-color: var(--reddit-light-gray);
-    color: var(--reddit-text);
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Main container */
+/* DemandeDetails.css - Version améliorée */
+.demande-details {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: 2.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  position: relative;
+}
+
+/* Titre principal avec style distinctif */
+.demande-details h1 {
+  font-size: 2.2rem;
+  margin: 1.5rem 0;
+  padding-bottom: 1rem;
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  font-weight: 700;
+}
+
+/* Bloc d'informations utilisateur amélioré */
+.demande-utilisateur {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-left: 6px solid #3498db;
+  position: relative;
+  overflow: hidden;
+}
+
+.demande-utilisateur::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  z-index: 0;
+}
+
+.demande-utilisateur h2 {
+  color: #2c3e50;
+  font-size: 1.6rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.demande-utilisateur p {
+  margin: 0.8rem 0;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+
+.demande-utilisateur strong {
+  min-width: 100px;
+  font-weight: 600;
+  color: #3498db;
+  position: relative;
+}
+
+/* Galerie d'images avec première image plus grande */
+.demande-images-gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+/* Première image plus grande */
+.demande-images-gallery img:first-child {
+  grid-column: span 8;
+  height: 400px;
+}
+
+/* Images secondaires */
+.demande-images-gallery img:not(:first-child) {
+  grid-column: span 4;
+  height: 200px;
+}
+
+/* Style pour toutes les images */
+.demande-detail-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.demande-detail-image:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+/* Informations de ville et date stylisées */
+.demande-details > p {
+  margin: 0.8rem 0;
+  font-size: 1.05rem;
+  color: #555;
+}
+
+.demande-details > p strong {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+/* Description avec style amélioré */
+.demande-details > p:last-of-type {
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #444;
+  white-space: pre-line;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #e9ecef;
+}
+
+/* Message de chargement */
+.demande-details > p:first-child:last-child {
+  text-align: center;
+  padding: 5rem;
+  color: #7f8c8d;
+  font-style: italic;
+  font-size: 1.2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
   .demande-details {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: var(--reddit-card-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem 1rem;
   }
   
-  /* Main image */
-  .demande-detail-image {
-    width:750px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 20px;
+  .demande-images-gallery img:first-child {
+    grid-column: span 12;
+    height: 350px;
   }
   
-  /* Title */
+  .demande-images-gallery img:not(:first-child) {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
   .demande-details h1 {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--reddit-text);
-    margin: 0 0 15px 0;
-    line-height: 1.3;
+    font-size: 1.8rem;
   }
   
-  /* Description */
-  .demande-details p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    color: var(--reddit-text);
+  .demande-utilisateur strong {
+    min-width: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .demande-details {
+    padding: 1.5rem;
+    margin: 1rem;
   }
   
-  /* Metadata (ville, date) */
-  .demande-details p:nth-of-type(2),
-  .demande-details p:nth-of-type(3) {
-    font-size: 14px;
-    color: var(--reddit-secondary-text);
-    padding: 8px 0;
-    border-top: 1px solid var(--reddit-border);
+  .demande-utilisateur {
+    padding: 1.5rem;
   }
   
-  .demande-details p:last-child {
-    margin-bottom: 0;
+  .demande-images-gallery {
+    gap: 0.8rem;
   }
   
-  /* Strong tags */
-  .demande-details strong {
-    font-weight: 600;
-    color: var(--reddit-text);
+  .demande-images-gallery img:first-child {
+    height: 250px;
   }
   
-  /* Loading state */
-  .demande-details + p {
-    text-align: center;
-    font-size: 18px;
-    color: var(--reddit-secondary-text);
-    margin: 50px 0;
+  .demande-images-gallery img:not(:first-child) {
+    grid-column: span 12;
+    height: 200px;
   }
   
-  /* Image gallery (if you decide to add multiple images) */
-  .image-gallery {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+  .demande-utilisateur strong {
+    display: block;
+    margin-bottom: 0.3rem;
   }
   
-  .image-gallery img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: opacity 0.2s;
+  .demande-utilisateur p {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1rem 0;
   }
-  
-  .image-gallery img:hover {
-    opacity: 0.9;
-  }
-  
-  /* Back button (if you decide to add one) */
-  .back-button {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 15px;
-    color: var(--reddit-blue);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .back-button:hover {
-    text-decoration: underline;
-  }
-  
-  .back-button::before {
-    content: "←";
-    margin-right: 5px;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 850px) {
-    .demande-details {
-      max-width: 95%;
-      margin: 15px auto;
-      padding: 15px;
-    }
-  
-    .demande-detail-image {
-      max-height: 400px;
-    }
-  
-    .demande-details h1 {
-      font-size: 22px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .demande-details {
-      padding: 12px;
-    }
-  
-    .demande-detail-image {
-      max-height: 300px;
-    }
-  
-    .demande-details h1 {
-      font-size: 20px;
-    }
-  
-    .demande-details p {
-      font-size: 15px;
-    }
-  }
-  
-  
+}
