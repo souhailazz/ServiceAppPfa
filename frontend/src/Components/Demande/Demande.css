@@ -169,10 +169,7 @@ body {
   align-items: center;
 }
 
-.demande-location::before {
-  content: "📍";
-  margin-right: 6px;
-}
+
 
 .demande-budget {
   font-size: 13px;
@@ -339,11 +336,7 @@ body {
   background-color: rgba(58, 134, 255, 0.05);
 }
 
-.photo-upload-box::before {
-  content: "+";
-  font-size: 24px;
-  color: var(--lighter-text);
-}
+
 
 /* Submit button - enhanced with better styling and hover effects */
 .submit-button {

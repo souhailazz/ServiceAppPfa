@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Demande.css";
+// Import React Icons
+import { FaThumbsUp, FaComment, FaMapMarkerAlt, FaClock, FaPaperPlane } from "react-icons/fa";
+import { MdClose, MdAddPhotoAlternate, MdPublic } from "react-icons/md";
+import { BsPersonCircle, BsSendFill } from "react-icons/bs";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 const API_URL = "http://localhost:5207";
 
@@ -134,7 +139,7 @@ const Demande = () => {
     }
   
     const formData = new FormData();
-    formData.append("ClientId", userId.toString());  // Fixed: changed userIdNum to userId
+    formData.append("ClientId", userId.toString());
     formData.append("Titre", newDemande.Titre.trim());
     formData.append("Description", newDemande.Description.trim());
     formData.append("Ville", newDemande.Ville.trim());
@@ -146,7 +151,7 @@ const Demande = () => {
     }
   
     try {
-      console.log("Submitting with userId:", userId);  // Fixed: changed userIdNum to userId
+      console.log("Submitting with userId:", userId);
       
       const response = await fetch(`${API_URL}/api/Demandes/create`, {
         method: "POST",
@@ -195,7 +200,9 @@ const Demande = () => {
         {demandes.length > 0 ? (
           demandes.map((demande) => (
             <div key={demande.id} className="demande-card">
-            <div className="demande-public-title">  <h4>Demande publique</h4> </div>  
+              <div className="demande-public-title">
+                <h4><MdPublic style={{ marginRight: '5px' }} /> Demande publique</h4>
+              </div>  
               <Link to={`/demande/${demande.id}`} className="demande-link">
                 <img 
                   src={demande.photoUrll && demande.photoUrll.length > 0 ? demande.photoUrll[0] : "/placeholder-image.jpg"} 
@@ -203,18 +210,31 @@ const Demande = () => {
                   className="demande-image" 
                   onError={(e) => {e.target.onerror = null; e.target.src = "/placeholder-image.jpg"}}
                 />
-                <h2 className="demande-title">{demande.titre}</h2>
+                <h2 className="demande-title">
+                  <IoDocumentTextOutline style={{ marginRight: '8px' }} />
+                  {demande.titre}
+                </h2>
                 <p className="demande-description">
-  {demande.description.length > 200
-    ? demande.description.slice(0, 200) + '...'
-    : demande.description}
-</p>
-                <p className="demande-location">{demande.ville}</p>
-                <p className="demande-date">{new Date(demande.datePublication).toLocaleString()}</p>
+                  {demande.description.length > 200
+                    ? demande.description.slice(0, 200) + '...'
+                    : demande.description}
+                </p>
+                <p className="demande-location">
+                  <FaMapMarkerAlt style={{ marginRight: '5px' }} />
+                  {demande.ville}
+                </p>
+                <p className="demande-date">
+                  <FaClock style={{ marginRight: '5px' }} />
+                  {new Date(demande.datePublication).toLocaleString()}
+                </p>
               </Link>
               <div className="demande-actions">
-                <button className="demande-like">Like</button>
-                <button className="demande-comment" onClick={() => openCommentModal(demande.id)}>Comment</button>
+                <button className="demande-like">
+                  <FaThumbsUp style={{ marginRight: '5px' }} /> Like
+                </button>
+                <button className="demande-comment" onClick={() => openCommentModal(demande.id)}>
+                  <FaComment style={{ marginRight: '5px' }} /> Comment
+                </button>
               </div>
             </div>
           ))
@@ -225,7 +245,7 @@ const Demande = () => {
 
       {/* New demand form */}
       <div className="demande-form-container">
-        <h2>Demande public</h2>
+        <h2><MdPublic style={{ marginRight: '10px', verticalAlign: 'middle' }} /> Demande publique</h2>
         <form onSubmit={handleSubmitDemande} className="demande-form">
           <div className="form-group">
             <label htmlFor="titre">Titre:<span className="required">*</span></label>
@@ -253,7 +273,10 @@ const Demande = () => {
           </div>
           
           <div className="form-group">
-            <label htmlFor="ville">Ville:<span className="required">*</span></label>
+            <label htmlFor="ville">
+              <FaMapMarkerAlt style={{ marginRight: '5px' }} />
+              Ville:<span className="required">*</span>
+            </label>
             <input
               type="text"
               id="ville"
@@ -266,7 +289,10 @@ const Demande = () => {
           </div>
           
           <div className="form-group">
-            <label htmlFor="photos">Photos:</label>
+            <label htmlFor="photos">
+              <MdAddPhotoAlternate style={{ marginRight: '5px' }} />
+              Photos:
+            </label>
             <input
               type="file"
               id="photos"
@@ -283,7 +309,14 @@ const Demande = () => {
             className="submit-button" 
             disabled={isLoading}
           >
-            {isLoading ? "Création en cours..." : "Poster ma demande"}
+            {isLoading ? (
+              <>Création en cours...</>
+            ) : (
+              <>
+                <BsSendFill style={{ marginRight: '8px' }} />
+                Poster ma demande
+              </>
+            )}
           </button>
           
           {submitMessage && (
@@ -305,27 +338,40 @@ const Demande = () => {
       {showModal && (
         <div className="comment-modal">
           <div className="modal-content">
-            <h2>Commentaires</h2>
-            <button className="close-btn" onClick={() => setShowModal(false)}>X</button>
+            <h2><FaComment style={{ marginRight: '10px' }} /> Commentaires</h2>
+            <button className="close-btn" onClick={() => setShowModal(false)}>
+              <MdClose />
+            </button>
             <div className="comment-list">
               {commentaires.length > 0 ? (
                 commentaires.map((comment) => (
                   <div key={comment.id} className="comment">
-                    <strong>{comment.utilisateurNom}:</strong>
+                    <div className="comment-header">
+                      <BsPersonCircle style={{ marginRight: '5px' }} />
+                      <strong>{comment.utilisateurNom}:</strong>
+                    </div>
                     <p>{comment.contenu}</p>
-                    <span>{new Date(comment.dateCommentaire).toLocaleString()}</span>
+                    <span className="comment-date">
+                      <FaClock style={{ marginRight: '5px' }} />
+                      {new Date(comment.dateCommentaire).toLocaleString()}
+                    </span>
                   </div>
                 ))
               ) : (
                 <p>Aucun commentaire pour cette demande.</p>
               )}
             </div>
-            <textarea
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Ajoutez un commentaire..."
-            ></textarea>
-            <button onClick={handleCommentSubmit}>Envoyer</button>
+            <div className="comment-input-container">
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Ajoutez un commentaire..."
+              ></textarea>
+              <button onClick={handleCommentSubmit}>
+                <FaPaperPlane style={{ marginRight: '5px' }} />
+                Envoyer
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./DemandeDetails.css";
+// Import React Icons
+import { FaUser, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaComment, FaTrashAlt, FaPaperPlane } from "react-icons/fa";
+import { BsImages } from "react-icons/bs";
 
 const API_URL = "http://localhost:5207";
 
@@ -93,7 +96,7 @@ const DemandeDetails = () => {
     <div className="demande-details">
       {/* Infos Utilisateur en premier */}
       <div className="demande-utilisateur">
-        <h2>Informations du demandeur</h2>
+        <h2><FaUser className="icon" /> Informations du demandeur</h2>
         <p>
           <strong>Nom:</strong> {demande.utilisateur.nom}
         </p>
@@ -101,10 +104,10 @@ const DemandeDetails = () => {
           <strong>Prénom:</strong> {demande.utilisateur.prenom}
         </p>
         <p>
-          <strong>Téléphone:</strong> {demande.utilisateur.telephone}
+          <strong><FaPhone className="icon" /> Téléphone:</strong> {demande.utilisateur.telephone}
         </p>
         <p>
-          <strong>Ville:</strong> {demande.utilisateur.ville}
+          <strong><FaMapMarkerAlt className="icon" /> Ville:</strong> {demande.utilisateur.ville}
         </p>
       </div>
 
@@ -113,15 +116,16 @@ const DemandeDetails = () => {
 
       {/* Date et Ville de la demande */}
       <p>
-        <strong>Ville:</strong> {demande.ville}
+        <strong><FaMapMarkerAlt className="icon" /> Ville:</strong> {demande.ville}
       </p>
       <p>
-        <strong>Date:</strong>{" "}
+        <strong><FaCalendarAlt className="icon" /> Date:</strong>{" "}
         {new Date(demande.datePublication).toLocaleString()}
       </p>
 
       {/* Galerie d'images */}
       <div className="demande-images-gallery">
+        <h3><BsImages className="icon" /> Images</h3>
         {demande.photoUrls && demande.photoUrls.length > 0 ? (
           demande.photoUrls.map((photoUrl, index) => (
             <img
@@ -149,7 +153,7 @@ const DemandeDetails = () => {
 
       {/* Comments Section */}
       <div className="comments-section">
-        <h2>Commentaires ({comments.length})</h2>
+        <h2><FaComment className="icon" /> Commentaires ({comments.length})</h2>
         
         {/* Add Comment Form */}
         {currentUser && (
@@ -160,7 +164,9 @@ const DemandeDetails = () => {
               placeholder="Ajouter un commentaire..."
               required
             />
-            <button type="submit">Publier</button>
+            <button type="submit">
+              <FaPaperPlane className="icon" /> Publier
+            </button>
           </form>
         )}
 
@@ -169,16 +175,18 @@ const DemandeDetails = () => {
           {comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div className="comment-header">
-                <span className="comment-author">{comment.utilisateurNom}</span>
+                <span className="comment-author">
+                  <FaUser className="icon" /> {comment.utilisateurNom}
+                </span>
                 <span className="comment-date">
-                  {new Date(comment.dateCommentaire).toLocaleString()}
+                  <FaCalendarAlt className="icon" /> {new Date(comment.dateCommentaire).toLocaleString()}
                 </span>
                 {currentUser && currentUser.id === comment.utilisateurId && (
                   <button
                     onClick={() => handleDeleteComment(comment.id)}
                     className="delete-comment-btn"
                   >
-                    Supprimer
+                    <FaTrashAlt className="icon" /> Supprimer
                   </button>
                 )}
               </div>
