@@ -28,7 +28,10 @@ const Login = () => {
           sessionStorage.setItem('userRole', response.data.role);
           console.log('User ID from login:', response.data.utilisateurId);
           
-            navigate('/HomePage');
+          // Trigger storage event to update navigation
+          window.dispatchEvent(new Event('storage'));
+          
+          navigate('/HomePage');
         }
     } catch (err) {
         // Handle errors
