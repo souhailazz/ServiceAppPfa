@@ -48,7 +48,7 @@ const SignUp = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Registration successful:', result);
-        navigate('/HomePage');
+        navigate('/home');
       } else {
         const errorText = await response.text();
         console.error('Response not OK:', response.status, errorText);

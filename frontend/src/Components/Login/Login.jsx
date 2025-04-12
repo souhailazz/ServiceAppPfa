@@ -31,7 +31,7 @@ const Login = () => {
           // Trigger storage event to update navigation
           window.dispatchEvent(new Event('storage'));
           
-          navigate('/HomePage');
+          navigate('/home');
         }
     } catch (err) {
         // Handle errors
