@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./DemandeDetails.css";
-// Import React Icons
-import { FaUser, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaComment, FaTrashAlt, FaPaperPlane } from "react-icons/fa";
+import {
+  FaUser,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaComment,
+  FaTrashAlt,
+  FaPaperPlane,
+} from "react-icons/fa";
 import { BsImages } from "react-icons/bs";
 
 const API_URL = "http://localhost:5207";
@@ -15,9 +22,8 @@ const DemandeDetails = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Fetch demande details
     fetch(`${API_URL}/api/Demandes/${id}`)
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
         if (data.photoUrls) {
           data.photoUrls = data.photoUrls.map((url) =>
@@ -26,17 +32,13 @@ const DemandeDetails = () => {
         }
         setDemande(data);
       })
-      .catch((error) =>
-        console.error("Error fetching demande details:", error)
-      );
+      .catch((err) => console.error("Erreur récupération demande :", err));
 
-    // Fetch comments
     fetch(`${API_URL}/api/Commentaires/commentaires/${id}`)
-      .then((response) => response.json())
-      .then((data) => setComments(data))
-      .catch((error) => console.error("Error fetching comments:", error));
+      .then((res) => res.json())
+      .then(setComments)
+      .catch((err) => console.error("Erreur récupération commentaires :", err));
 
-    // Get current user from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
     setCurrentUser(user);
   }, [id]);
@@ -48,9 +50,7 @@ const DemandeDetails = () => {
     try {
       const response = await fetch(`${API_URL}/api/Commentaires/ajouter-commentaire`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           DemandeId: parseInt(id),
           UtilisateurId: currentUser.id,
@@ -59,143 +59,142 @@ const DemandeDetails = () => {
       });
 
       if (response.ok) {
-        const updatedComments = await fetch(`${API_URL}/api/Commentaires/commentaires/${id}`)
-          .then((res) => res.json());
+        const updatedComments = await fetch(`${API_URL}/api/Commentaires/commentaires/${id}`).then((r) => r.json());
         setComments(updatedComments);
         setNewComment("");
       }
-    } catch (error) {
-      console.error("Error adding comment:", error);
+    } catch (err) {
+      console.error("Erreur ajout commentaire :", err);
     }
   };
 
   const handleDeleteComment = async (commentId) => {
     if (!currentUser) return;
-
     try {
       const response = await fetch(
         `${API_URL}/api/Commentaires/supprimer-commentaire/${commentId}/${currentUser.id}`,
-        {
-          method: "DELETE",
-        }
+        { method: "DELETE" }
       );
-
       if (response.ok) {
-        const updatedComments = await fetch(`${API_URL}/api/Commentaires/commentaires/${id}`)
-          .then((res) => res.json());
-        setComments(updatedComments);
+        const updated = await fetch(`${API_URL}/api/Commentaires/commentaires/${id}`).then((r) => r.json());
+        setComments(updated);
       }
-    } catch (error) {
-      console.error("Error deleting comment:", error);
+    } catch (err) {
+      console.error("Erreur suppression commentaire :", err);
     }
   };
 
-  if (!demande) return <p>Loading...</p>;
+  if (!demande) return <p>Chargement...</p>;
 
   return (
-    <div className="demande-details">
-      {/* Infos Utilisateur en premier */}
-      <div className="demande-utilisateur">
-        <h2><FaUser className="icon" /> Informations du demandeur</h2>
-        <p>
-          <strong>Nom:</strong> {demande.utilisateur.nom}
-        </p>
-        <p>
-          <strong>Prénom:</strong> {demande.utilisateur.prenom}
-        </p>
-        <p>
-          <strong><FaPhone className="icon" /> Téléphone:</strong> {demande.utilisateur.telephone}
-        </p>
-        <p>
-          <strong><FaMapMarkerAlt className="icon" /> Ville:</strong> {demande.utilisateur.ville}
-        </p>
+<div className="demande-page">
+  <div className="grid-layout">
+    {/* Colonne gauche */}
+    <div className="main-content">
+      <div className="card demande-info">
+        <h1 className="title">{demande.titre}</h1>
+        <div className="sub-info">
+          <span><FaMapMarkerAlt className="icon" /> {demande.ville}</span>
+          <span><FaCalendarAlt className="icon" /> {new Date(demande.datePublication).toLocaleString()}</span>
+        </div>
+        <h3 className="section-title">Description</h3>
+        <p className="description-text">{demande.description}</p>
       </div>
 
-      {/* Titre de la demande */}
-      <h1>{demande.titre}</h1>
-
-      {/* Date et Ville de la demande */}
-      <p>
-        <strong><FaMapMarkerAlt className="icon" /> Ville:</strong> {demande.ville}
-      </p>
-      <p>
-        <strong><FaCalendarAlt className="icon" /> Date:</strong>{" "}
-        {new Date(demande.datePublication).toLocaleString()}
-      </p>
-
-      {/* Galerie d'images */}
-      <div className="demande-images-gallery">
-        <h3><BsImages className="icon" /> Images</h3>
-        {demande.photoUrls && demande.photoUrls.length > 0 ? (
-          demande.photoUrls.map((photoUrl, index) => (
-            <img
-              key={index}
-              src={photoUrl}
-              alt={`${demande.titre} - image ${index + 1}`}
-              className="demande-detail-image"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "/placeholder-image.jpg";
-              }}
-            />
-          ))
+      <div className="card image-section">
+        <h3 className="section-title"><BsImages className="icon" /> Images</h3>
+        {demande.photoUrls?.length > 0 ? (
+          <div className="image-grid">
+            {demande.photoUrls.map((url, i) => (
+              <img key={i} src={url} alt={`photo-${i}`} className="image-item" />
+            ))}
+          </div>
         ) : (
-          <img
-            src="/placeholder-image.jpg"
-            alt="Pas d'image disponible"
-            className="demande-detail-image"
-          />
+          <img src="/placeholder-image.jpg" alt="placeholder" className="image-item" />
         )}
       </div>
 
-      {/* Description */}
-      <p>{demande.description}</p>
-
-      {/* Comments Section */}
-      <div className="comments-section">
-        <h2><FaComment className="icon" /> Commentaires ({comments.length})</h2>
+      <div className="card comment-section">
+        <h3 className="section-title"><FaComment className="icon" /> Commentaires ({comments.length})</h3>
         
-        {/* Add Comment Form */}
         {currentUser && (
-          <form onSubmit={handleAddComment} className="add-comment-form">
+          <form onSubmit={handleAddComment} className="comment-form">
             <textarea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Ajouter un commentaire..."
+              placeholder="Écrire un commentaire..."
               required
             />
-            <button type="submit">
-              <FaPaperPlane className="icon" /> Publier
-            </button>
+            <button type="submit" className="btn-comment"><FaPaperPlane /> Publier</button>
           </form>
         )}
 
-        {/* Comments List */}
-        <div className="comments-list">
-          {comments.map((comment) => (
-            <div key={comment.id} className="comment">
-              <div className="comment-header">
-                <span className="comment-author">
-                  <FaUser className="icon" /> {comment.utilisateurNom}
-                </span>
-                <span className="comment-date">
-                  <FaCalendarAlt className="icon" /> {new Date(comment.dateCommentaire).toLocaleString()}
-                </span>
-                {currentUser && currentUser.id === comment.utilisateurId && (
-                  <button
-                    onClick={() => handleDeleteComment(comment.id)}
-                    className="delete-comment-btn"
-                  >
-                    <FaTrashAlt className="icon" /> Supprimer
-                  </button>
-                )}
-              </div>
-              <p className="comment-content">{comment.contenu}</p>
+        {comments.map((comment) => (
+          <div key={comment.id} className="comment-box">
+            <div className="comment-meta">
+              <strong><FaUser /> {comment.utilisateurNom}</strong>
+              <span><FaCalendarAlt /> {new Date(comment.dateCommentaire).toLocaleString()}</span>
+              {currentUser?.id === comment.utilisateurId && (
+                <button onClick={() => handleDeleteComment(comment.id)} className="delete-btn">
+                  <FaTrashAlt />
+                </button>
+              )}
             </div>
-          ))}
-        </div>
+            <p>{comment.contenu}</p>
+          </div>
+        ))}
       </div>
     </div>
+
+    {/* Colonne droite */}
+    <div className="sidebar">
+  <div className="card user-card">
+    <h3><FaUser className="icon" /> Demandeur</h3>
+    
+    <div className="user-profile">
+      <div className="user-avatar">
+        {demande.utilisateur.photoUrl ? (
+          <img src={demande.utilisateur.photoUrl} alt="Photo profil" />
+        ) : (
+          <FaUser className="fallback-icon" />
+        )}
+      </div>
+      <div className="user-name">
+        <h4>{demande.utilisateur.prenom} {demande.utilisateur.nom}</h4>
+        <p>Membre actif</p>
+      </div>
+    </div>
+    
+    <div className="user-info-list">
+      <div className="user-info-item">
+        <FaPhone className="icon" />
+        <p><span className="user-info-label">Téléphone:</span> {demande.utilisateur.telephone}</p>
+      </div>
+      
+      <div className="user-info-item">
+        <FaMapMarkerAlt className="icon" />
+        <p><span className="user-info-label">Localisation:</span> {demande.utilisateur.ville}</p>
+      </div>
+      
+      {demande.utilisateur.email && (
+        <div className="user-info-item">
+          <FaPaperPlane className="icon" />
+          <p><span className="user-info-label">Email:</span> {demande.utilisateur.email}</p>
+        </div>
+      )}
+    </div>
+    
+    <button className="user-contact-btn">
+      <FaComment className="icon" /> Contacter
+    </button>
+    
+    <div className="user-joined">
+      <FaCalendarAlt className="icon" /> Membre depuis {new Date(demande.utilisateur.dateInscription || Date.now()).toLocaleDateString()}
+    </div>
+  </div>
+</div>
+  </div>
+</div>
   );
 };
 
