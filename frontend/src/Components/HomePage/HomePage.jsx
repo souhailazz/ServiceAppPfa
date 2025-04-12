@@ -79,7 +79,7 @@ const HomePage = () => {
           <div className="steps">
             <div className="step">
               <div className="step-number">1</div>
-              <h3>Inscrivez-vous</h3>
+              <h3> <a href="/signup">Inscrivez-vous</a></h3>
               <p>
                 Créez votre profil gratuitement et rejoignez la communauté de votre
                 quartier.
@@ -202,7 +202,7 @@ const HomePage = () => {
             découvrez la puissance de l'entraide de proximité.
           </p>
           <div className="cta-buttons">
-            <a href="#" className="cta-button">S'inscrire gratuitement</a>
+            <a href="/signup" className="cta-button">S'inscrire gratuitement</a>
             <a href="#" className="cta-button cta-secondary">En savoir plus</a>
           </div>
         </section>

@@ -12,6 +12,8 @@ import Professionnel from './Components/Professionnel/Professionnel'
 import ProfessionnelDetails from './Components/ProfessionnelDetails/ProfessionnelDetails'
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -44,31 +46,37 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <nav>
-            <div className="logo">
-              <Link to="/home">
-                <img src={logo} alt="ALLoService Logo" />
-              </Link>
-            </div>
+        <nav>
+  <div className="logo">
+    <Link to="/home">
+      <img src={logo} alt="ALLoService Logo" />
+    </Link>
+  </div>
 
-            <div className="nav-links">
-              {!isLoggedIn && <Link to="/signup">Register</Link>}
-              <Link to="/home">Accueil</Link>
-              <Link to="/demande">Demande</Link>
-              <Link to="/professionnel">Professionnel</Link>
-            </div>
+  <button 
+    className={`menu-toggle ${menuOpen ? 'active' : ''}`} 
+    onClick={() => setMenuOpen(!menuOpen)}
+  >
+    <span></span>
+  </button>
 
-            <div className="profile">
-              {isLoggedIn ? (
-                <>
-                  <Link to="/Profile">Profile</Link>
-                  <button onClick={handleLogout} className="logout-button">Déconnexion</button>
-                </>
-              ) : (
-                <Link to="/Login">Login</Link>
-              )}
-            </div>
-          </nav>
+  <div className={`nav-links ${menuOpen ? 'active' : ''}`}>
+    {!isLoggedIn && <Link to="/signup">Register</Link>}
+    <Link to="/home">Accueil</Link>
+    <Link to="/demande">Demande</Link>
+    <Link to="/professionnel">Professionnel</Link>
+
+    {isLoggedIn ? (
+      <>
+        <Link to="/Profile">Profile</Link>
+        <button onClick={handleLogout} className="logout-button">Déconnexion</button>
+      </>
+    ) : (
+      <Link to="/Login">Login</Link>
+    )}
+  </div>
+</nav>
+
         </header>
 
         <Routes>
