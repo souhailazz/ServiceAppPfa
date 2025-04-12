@@ -19,7 +19,7 @@ const HomePage = () => {
   <div className="hero-content">
     <h1>L'entraide entre voisins n'a jamais été aussi simple</h1>
     <p>
-      VoisinService connecte les personnes d'un même quartier pour échanger
+      AlloService connecte les personnes d'un même quartier pour échanger
       des services, des objets et créer du lien social.
     </p>
     <a href="#" className="cta-button">Découvrir</a>
@@ -31,7 +31,7 @@ const HomePage = () => {
           <div className="section-title">
             <h2>Nos services</h2>
             <p>
-              VoisinService facilite l'entraide et la solidarité dans votre
+              AlloService facilite l'entraide et la solidarité dans votre
               quartier avec une plateforme simple et sécurisée.
             </p>
           </div>
@@ -110,13 +110,13 @@ const HomePage = () => {
         <section className="testimonials" id="testimonials">
           <div className="section-title">
             <h2>Témoignages</h2>
-            <p>Découvrez ce que nos utilisateurs disent de VoisinService.</p>
+            <p>Découvrez ce que nos utilisateurs disent de AlloService.</p>
           </div>
   
           <div className="testimonial-cards">
             <div className="testimonial-card">
               <p className="testimonial-text">
-                "Grâce à VoisinService, j'ai trouvé quelqu'un pour m'aider à monter un
+                "Grâce à AlloService, j'ai trouvé quelqu'un pour m'aider à monter un
                 meuble et j'ai rencontré des voisins formidables. Une vraie communauté
                 s'est créée dans notre immeuble !"
               </p>
@@ -196,7 +196,7 @@ const HomePage = () => {
   
         {/* CTA Section */}
         <section className="cta-section">
-          <h2>Rejoignez la communauté VoisinService</h2>
+          <h2>Rejoignez la communauté AlloService</h2>
           <p>
             Des milliers de voisins vous attendent. Démarrez dès aujourd'hui et
             découvrez la puissance de l'entraide de proximité.
@@ -211,7 +211,7 @@ const HomePage = () => {
         <footer className="footer">
           <div className="footer-content">
             <div className="footer-column">
-              <h3>VoisinService</h3>
+              <h3>AlloService</h3>
               <p>
                 La plateforme qui révolutionne l'entraide entre voisins et redonne
                 vie aux quartiers.
@@ -255,7 +255,7 @@ const HomePage = () => {
           </div>
   
           <div className="footer-bottom">
-            <p>&copy; 2025 VoisinService. Tous droits réservés.</p>
+            <p>&copy; 2025 AlloService. Tous droits réservés.</p>
           </div>
         </footer>
       </div>
