@@ -681,3 +681,4 @@ C:\Users\PC\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\refint\backe
 C:\Users\PC\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\PC\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\PC\Documents\GitHub\ServiceAppPfa\backend\obj\Debug\net8.0\ref\backend.dll
+C:\Users\dafal\Documents\GitHub\ServiceAppPfa\backend\bin\Debug\net8.0\Newtonsoft.Json.dll

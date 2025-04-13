@@ -14,7 +14,7 @@ namespace backend.Data
         public DbSet<Photos> PhotoDB { get; set; }
         public DbSet<Commentaires> CommentaireDB { get; set; }
         public DbSet<Evaluations> EvaluationDB { get; set; }
-        public DbSet<Chatbot> ChatbotDB { get; set; }
+public DbSet<Chatbot> Chatbots { get; set; } 
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
        // Mapper les tables
