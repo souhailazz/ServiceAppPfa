@@ -39,6 +39,7 @@ body {
   padding: 20px;/* Establish positioning context */
 }
 
+
 /* Left side - posts grid */
 .demande-grid {
   flex: 1;

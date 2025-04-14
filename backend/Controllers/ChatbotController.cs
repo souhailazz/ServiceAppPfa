@@ -1,13 +1,9 @@
+using backend.Data;
 using backend.Models;
 using backend.Models.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using backend.Data;
-using System.Net.Http.Headers;
-using System.Net.Http;
+using System.Text.RegularExpressions;
 
 namespace backend.Controllers
 {
@@ -17,81 +13,88 @@ namespace backend.Controllers
     {
         private readonly AppDbContext _context;
 
-        // Remplacez par votre clé API Hugging Face ici
-
         public ChatbotController(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ChatbotRequest request, [FromForm] userDto userDto)
+        public async Task<IActionResult> Post([FromBody] ChatbotRequest request)
         {
-            var prompt = request.Message;
+            var message = request.Message.ToLower();
 
-            // Récupérer le client associé à l'utilisateur
+            // Vérifier si l'utilisateur est un client
             var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == request.UtilisateurId);
             if (client == null)
-            {
                 return Unauthorized("Aucun client associé à cet utilisateur.");
-            }
 
-            // Créer une instance HttpClient pour appeler l'API Hugging Face
-            using (var httpClient = new HttpClient())
+            // Liste des métiers possibles
+            var metiers = new[] { "plombier", "electricien", "menuisier", "mecanicien", "tolier", "jardinier", "peintre" };
+
+            string? metierTrouve = metiers.FirstOrDefault(m => message.Contains(m));
+            string? villeTrouvee = ExtraireVille(message);
+
+            string reponseFinale;
+
+           if (metierTrouve != null && villeTrouvee != null)
+{
+    var pros = await _context.ProfessionnelDB
+        .Include(p => p.Utilisateur)
+        .Where(p => p.Metier.ToLower() == metierTrouve && p.Utilisateur.Ville.ToLower() == villeTrouvee)
+        .ToListAsync();
+
+    if (pros.Any())
+    {
+        reponseFinale = $"Voici des {metierTrouve}s disponibles à {villeTrouvee} :\n\n" +
+            string.Join("\n", pros.Select(p =>
+                $"- {p.Utilisateur.Prenom} {p.Utilisateur.Nom} |  {p.Utilisateur.Telephone ?? "Non renseigné"}"));
+    }
+    else
+    {
+        reponseFinale = $"Désolé, aucun {metierTrouve} trouvé à {villeTrouvee} pour le moment.";
+    }
+}
+            else if (message.Contains("problème") || message.Contains("comment") || message.Contains("aide"))
             {
-                // Ajouter l'en-tête Authorization pour la clé API Hugging Face
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _huggingFaceApiKey);
-
-                // Créer le contenu de la requête (prompt)
-                var content = new StringContent(JsonConvert.SerializeObject(new
-                {
-                    inputs = prompt
-                }), Encoding.UTF8, "application/json");
-
-                // Appeler l'API Hugging Face (modèle GPT-2 ou GPT-Neo)
-                var response = await httpClient.PostAsync("https://api-inference.huggingface.co/models/gpt2", content);
-                var resultJson = await response.Content.ReadAsStringAsync();
-
-                // Ajouter un diagnostic pour vérifier le contenu de la réponse
-                if (!response.IsSuccessStatusCode)
-                {
-                    // Si la réponse n'est pas correcte, retournez le contenu brut pour déboguer
-                    return BadRequest($"Erreur de l'API : {resultJson}");
-                }
-
-                // Vérifier si la réponse est valide JSON
-                try
-                {
-                    // Tenter de désérialiser la réponse
-                    var responseText = JsonConvert.DeserializeObject<dynamic>(resultJson)[0].generated_text.ToString();
-
-                    // Sauvegarder l'interaction dans la base de données
-                    var interaction = new Chatbot
-                    {
-                        UtilisateurId = request.UtilisateurId,
-                        Message = prompt,
-                        Reponse = responseText,
-                        DateInteraction = DateTime.Now
-                    };
-
-                    _context.Chatbots.Add(interaction);
-                    await _context.SaveChangesAsync();
-
-                    return Ok(new { reponse = responseText });
-                }
-                catch (JsonReaderException ex)
-                {
-                    // Si une erreur de JSON se produit, afficher le contenu brut
-                    return BadRequest($"Erreur de parsing JSON : {ex.Message}, Contenu brut : {resultJson}");
-                }
+                // Réponse basique d'aide pour des problèmes
+                reponseFinale = "Pouvez-vous me préciser le métier ou la ville concernée par votre problème ? Par exemple : \"J’ai un problème électrique à Casablanca\".";
             }
+            else
+            {
+                reponseFinale = "Je n’ai pas compris votre demande. Veuillez préciser le métier et la ville, comme : \"Je cherche un électricien à Rabat\".";
+            }
+
+            // Sauvegarder la conversation
+            var chat = new Chatbot
+            {
+                UtilisateurId = request.UtilisateurId,
+                Message = request.Message,
+                Reponse = reponseFinale,
+                DateInteraction = DateTime.Now
+            };
+            _context.Chatbots.Add(chat);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { reponse = reponseFinale });
+        }
+
+        private string? ExtraireVille(string message)
+        {
+            var villesConnues = new[] { "casablanca", "rabat", "marrakech", "tanger", "fes", "agadir" };
+            foreach (var ville in villesConnues)
+            {
+                if (message.ToLower().Contains(ville))
+                    return ville;
+            }
+
+            // Optionnel : extraire ville via regex ou NLP plus avancé
+            return null;
         }
     }
 
-    // DTO pour l'utilisateur
-    public class userDto
+    public class ChatbotRequest
     {
-        public int UserId { get; set; }
+        public int UtilisateurId { get; set; }
+        public string Message { get; set; }
     }
 }
-
