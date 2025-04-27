@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import "./Professionnel.css"
+import Chatbot from '../Chatbot/Chatbot';
 
 const Professionnel = () => {
   const [metiers, setMetiers] = useState([])
@@ -384,6 +385,7 @@ const Professionnel = () => {
           </div>
         )
       })}
+        <Chatbot />
     </div>
   )
 }
