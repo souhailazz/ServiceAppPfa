@@ -14,7 +14,9 @@ namespace backend.Data
         public DbSet<Photos> PhotoDB { get; set; }
         public DbSet<Commentaires> CommentaireDB { get; set; }
         public DbSet<Evaluations> EvaluationDB { get; set; }
-public DbSet<Chatbot> Chatbots { get; set; } 
+        public DbSet<Notification> NotificationDB { get; set; }
+        public DbSet<Chatbot> Chatbots { get; set; } 
+        
    protected override void OnModelCreating(ModelBuilder modelBuilder)
    {
        // Mapper les tables
@@ -26,8 +28,8 @@ public DbSet<Chatbot> Chatbots { get; set; }
        modelBuilder.Entity<Demandes>().ToTable("Demandes");
         modelBuilder.Entity<Commentaires>().ToTable("Commentaires");
          modelBuilder.Entity<Evaluations>().ToTable("Evaluations");
-                  modelBuilder.Entity<Chatbot>().ToTable("Chatbot");
-
+        modelBuilder.Entity<Chatbot>().ToTable("Chatbot");
+        modelBuilder.Entity<Notification>().ToTable("Notifications");
    }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

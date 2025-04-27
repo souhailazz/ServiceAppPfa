@@ -1,9 +1,12 @@
 using backend.Data;
 using backend.Models;
 using backend.Models.Dtos;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 
 namespace backend.Controllers
 {
@@ -12,6 +15,7 @@ namespace backend.Controllers
     public class ChatbotController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly HttpClient _httpClient = new();
 
         public ChatbotController(AppDbContext context)
         {
@@ -23,48 +27,56 @@ namespace backend.Controllers
         {
             var message = request.Message.ToLower();
 
-            // Vérifier si l'utilisateur est un client
             var client = await _context.ClientDB.FirstOrDefaultAsync(c => c.UtilisateurId == request.UtilisateurId);
             if (client == null)
                 return Unauthorized("Aucun client associé à cet utilisateur.");
 
-            // Liste des métiers possibles
-            var metiers = new[] { "plombier", "electricien", "menuisier", "mecanicien", "tolier", "jardinier", "peintre" };
+            var df = await AppelerDialogflow(request.Message);
 
-            string? metierTrouve = metiers.FirstOrDefault(m => message.Contains(m));
-            string? villeTrouvee = ExtraireVille(message);
+            string? metier = null;
+            string? ville = null;
 
+            if (df.queryResult.parameters.TryGetValue("metier", out var metierElement))
+            {
+                metier = ExtractStringFromJsonElement(metierElement);
+            }
+
+            if (df.queryResult.parameters.TryGetValue("ville", out var villeElement) ||
+                df.queryResult.parameters.TryGetValue("location", out villeElement))
+            {
+                ville = ExtractStringFromJsonElement(villeElement);
+            }
+
+            var intent = df.queryResult.intent?.displayName;
             string reponseFinale;
 
-           if (metierTrouve != null && villeTrouvee != null)
-{
-    var pros = await _context.ProfessionnelDB
-        .Include(p => p.Utilisateur)
-        .Where(p => p.Metier.ToLower() == metierTrouve && p.Utilisateur.Ville.ToLower() == villeTrouvee)
-        .ToListAsync();
-
-    if (pros.Any())
-    {
-        reponseFinale = $"Voici des {metierTrouve}s disponibles à {villeTrouvee} :\n\n" +
-            string.Join("\n", pros.Select(p =>
-                $"- {p.Utilisateur.Prenom} {p.Utilisateur.Nom} |  {p.Utilisateur.Telephone ?? "Non renseigné"}"));
-    }
-    else
-    {
-        reponseFinale = $"Désolé, aucun {metierTrouve} trouvé à {villeTrouvee} pour le moment.";
-    }
-}
-            else if (message.Contains("problème") || message.Contains("comment") || message.Contains("aide"))
+            if (intent == "TrouverProfessionnel" && metier != null && ville != null)
             {
-                // Réponse basique d'aide pour des problèmes
-                reponseFinale = "Pouvez-vous me préciser le métier ou la ville concernée par votre problème ? Par exemple : \"J’ai un problème électrique à Casablanca\".";
+                var pros = await _context.ProfessionnelDB
+                    .Include(p => p.Utilisateur)
+                    .Where(p => p.Metier.ToLower() == metier.ToLower() && p.Utilisateur.Ville.ToLower() == ville.ToLower())
+                    .ToListAsync();
+
+                if (pros.Any())
+                {
+                    reponseFinale = $"Voici des {metier}s disponibles à {ville} :\n\n" +
+                        string.Join("\n", pros.Select(p =>
+                            $"- {p.Utilisateur.Prenom} {p.Utilisateur.Nom} | {p.Utilisateur.Telephone ?? "Non renseigné"}"));
+                }
+                else
+                {
+                    reponseFinale = $"Désolé, aucun {metier} trouvé à {ville} pour le moment.";
+                }
+            }
+            else if (intent == "Aide" || message.Contains("problème") || message.Contains("aide"))
+            {
+                reponseFinale = "Pouvez-vous me préciser le métier ou la ville concernée ? Par exemple : \"J’ai un problème avec un électricien à Casablanca\".";
             }
             else
             {
-                reponseFinale = "Je n’ai pas compris votre demande. Veuillez préciser le métier et la ville, comme : \"Je cherche un électricien à Rabat\".";
+                reponseFinale = "Je n’ai pas compris votre demande. Essayez avec : \"Je cherche un plombier à Rabat\".";
             }
 
-            // Sauvegarder la conversation
             var chat = new Chatbot
             {
                 UtilisateurId = request.UtilisateurId,
@@ -72,29 +84,117 @@ namespace backend.Controllers
                 Reponse = reponseFinale,
                 DateInteraction = DateTime.Now
             };
+
             _context.Chatbots.Add(chat);
             await _context.SaveChangesAsync();
 
             return Ok(new { reponse = reponseFinale });
         }
 
-        private string? ExtraireVille(string message)
+        private async Task<DialogflowResponse> AppelerDialogflow(string message)
         {
-            var villesConnues = new[] { "casablanca", "rabat", "marrakech", "tanger", "fes", "agadir" };
-            foreach (var ville in villesConnues)
+            var projectId = "assistantmetiers-enep";
+            var sessionId = Guid.NewGuid().ToString();
+            var url = $"https://dialogflow.googleapis.com/v2/projects/{projectId}/agent/sessions/{sessionId}:detectIntent";
+
+            GoogleCredential credential;
+            using (var stream = new FileStream("Secrets/dialogflow-key.json", FileMode.Open, FileAccess.Read))
             {
-                if (message.ToLower().Contains(ville))
-                    return ville;
+                credential = GoogleCredential.FromStream(stream)
+                    .CreateScoped("https://www.googleapis.com/auth/dialogflow");
             }
 
-            // Optionnel : extraire ville via regex ou NLP plus avancé
+            var accessToken = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
+
+            var body = new
+            {
+                queryInput = new
+                {
+                    text = new
+                    {
+                        text = message,
+                        languageCode = "fr"
+                    }
+                }
+            };
+
+            var json = JsonSerializer.Serialize(body);
+            var requestHttp = new HttpRequestMessage(HttpMethod.Post, url);
+            requestHttp.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            requestHttp.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.SendAsync(requestHttp);
+            var content = await response.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<DialogflowResponse>(content);
+        }
+
+        private string? ExtractStringFromJsonElement(JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.String)
+            {
+                return element.GetString();
+            }
+            else if (element.ValueKind == JsonValueKind.Object && element.TryGetProperty("city", out var cityProp))
+            {
+                return cityProp.GetString();
+            }
+            else if (element.ValueKind == JsonValueKind.Array && element.GetArrayLength() > 0)
+            {
+                return element[0].GetString();
+            }
+
             return null;
         }
-    }
 
-    public class ChatbotRequest
-    {
-        public int UtilisateurId { get; set; }
-        public string Message { get; set; }
+        [HttpPost("creer-demande-chatbot")]
+        public async Task<IActionResult> CreerDemandeViaChatbot([FromBody] CreateDemandeFromChatbotDto dto)
+        {
+            var utilisateurExiste = await _context.ClientDB.AnyAsync(c => c.UtilisateurId == dto.UtilisateurId);
+            if (!utilisateurExiste)
+                return Unauthorized("Aucun utilisateur valide fourni.");
+
+            var demande = new Demandes
+            {
+                Titre = dto.Titre,
+                Description = dto.Description,
+                Ville = dto.Ville,
+                DatePublication = DateTime.Now,
+                ClientId = dto.UtilisateurId,
+                Photos = new List<Photos>()
+            };
+
+            _context.DemandeDB.Add(demande);
+            await _context.SaveChangesAsync();
+
+             //  kansifto  les professionnels notifications ela hsab demande wach kathmo 
+            if (!string.IsNullOrEmpty(dto.Metier))
+            {
+                var professionnelsCibles = await _context.ProfessionnelDB
+                    .Include(p => p.Utilisateur)
+                    .Where(p => 
+                        p.Metier.ToLower() == dto.Metier.ToLower() &&
+                        p.Utilisateur.Ville.ToLower() == dto.Ville.ToLower())
+                    .ToListAsync();
+
+                foreach (var professionnel in professionnelsCibles)
+                {
+                    var notification = new Notification
+                    {
+                        Titre = $"Nouveau projet de {dto.Metier} disponible",
+                        Message = $"Un client a publié une demande à {dto.Ville}.",
+                        ProfessionnelId = professionnel.Id,
+                        DateNotification = DateTime.Now,
+                        EstLue = false
+                    };
+
+                    _context.NotificationDB.Add(notification);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { message = "Demande créée avec succès et notifications envoyées !", demande.Id });
+        }
     }
 }
