@@ -59,22 +59,81 @@ namespace backend.Controllers
 
                 if (pros.Any())
                 {
-                    reponseFinale = $"Voici des {metier}s disponibles à {ville} :\n\n" +
-                        string.Join("\n", pros.Select(p =>
-                            $"- {p.Utilisateur.Prenom} {p.Utilisateur.Nom} | {p.Utilisateur.Telephone ?? "Non renseigné"}"));
+                    var professionnels = pros.Select(p => new {
+                        id = p.Id,
+                        prenom = p.Utilisateur.Prenom,
+                        nom = p.Utilisateur.Nom,
+                        telephone = p.Utilisateur.Telephone ?? "Non renseigné",
+                        ville = p.Utilisateur.Ville ?? "",
+                        metier = p.Metier ?? "",
+                        photo = _context.PhotoDB.Where(photo => photo.ProfessionnelId == p.Id).Select(photo => photo.Url).FirstOrDefault() ?? "",
+                        note = _context.EvaluationDB.Where(e => e.ProfessionnelId == p.Id).Average(e => (double?)e.Note) ?? 0,
+                        disponibilite = p.Disponibilite ?? "",
+                        tarif = p.Tarif ?? 0
+                    }).ToList();
+
+                    var reponseObj = new {
+                        reponse = $"Voici des {metier}s disponibles à {ville} :",
+                        professionnels,
+                        intent = intent
+                    };
+
+                    var chatRecord = new Chatbot
+                    {
+                        UtilisateurId = request.UtilisateurId,
+                        Message = request.Message,
+                        Reponse = reponseObj.reponse,
+                        DateInteraction = DateTime.Now
+                    };
+
+                    _context.Chatbots.Add(chatRecord);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(reponseObj);
                 }
                 else
                 {
                     reponseFinale = $"Désolé, aucun {metier} trouvé à {ville} pour le moment.";
                 }
             }
+            else if (intent == "CreerDemande")
+            {
+                var titre = df.queryResult.parameters.TryGetValue("titre", out var titreElement) ? ExtractStringFromJsonElement(titreElement) : null;
+                var description = df.queryResult.parameters.TryGetValue("description", out var descElement) ? ExtractStringFromJsonElement(descElement) : null;
+                var villeDemande = df.queryResult.parameters.TryGetValue("ville", out var villeDemandeElement) ? ExtractStringFromJsonElement(villeDemandeElement) : null;
+
+                if (!string.IsNullOrEmpty(titre) && !string.IsNullOrEmpty(description) && !string.IsNullOrEmpty(villeDemande))
+                {
+                    var demande = new Demandes
+                    {
+                        Titre = titre,
+                        Description = description,
+                        Ville = villeDemande,
+                        DatePublication = DateTime.Now,
+                        ClientId = request.UtilisateurId,
+                        Photos = new List<Photos>()
+                    };
+                    _context.DemandeDB.Add(demande);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { reponse = "Votre demande a bien été créée !", intent = intent });
+                }
+                else
+                {
+                    return Ok(new { reponse = df.queryResult.fulfillmentText, intent = intent });
+                }
+            }
             else if (intent == "Aide" || message.Contains("problème") || message.Contains("aide"))
             {
-                reponseFinale = "Pouvez-vous me préciser le métier ou la ville concernée ? Par exemple : \"J’ai un problème avec un électricien à Casablanca\".";
+                reponseFinale = "Pouvez-vous me préciser le métier ou la ville concernée ? Par exemple : \"J'ai un problème avec un électricien à Casablanca\".";
+            }
+            else if (!string.IsNullOrEmpty(intent))
+            {
+                reponseFinale = "Je n'ai pas compris votre demande. Essayez avec : \"Je cherche un plombier à Rabat\".";
             }
             else
             {
-                reponseFinale = "Je n’ai pas compris votre demande. Essayez avec : \"Je cherche un plombier à Rabat\".";
+                reponseFinale = "Je n'ai pas compris votre demande. Essayez avec : \"Je cherche un plombier à Rabat\".";
             }
 
             var chat = new Chatbot
@@ -88,7 +147,7 @@ namespace backend.Controllers
             _context.Chatbots.Add(chat);
             await _context.SaveChangesAsync();
 
-            return Ok(new { reponse = reponseFinale });
+            return Ok(new { reponse = reponseFinale, intent = intent });
         }
 
         private async Task<DialogflowResponse> AppelerDialogflow(string message)

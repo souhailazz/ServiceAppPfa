@@ -1,0 +1,134 @@
+.procard-container {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  min-width: 220px;
+  transition: box-shadow 0.2s;
+}
+.procard-container:hover {
+  box-shadow: 0 4px 16px rgba(25,118,210,0.13);
+}
+.procard-rich {
+  min-width: 260px;
+  flex-direction: row;
+}
+.procard-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 14px;
+  border: 2px solid #1976d2;
+  flex-shrink: 0;
+}
+.procard-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.procard-infos {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.procard-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.procard-nom {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #1a202c;
+}
+.procard-badge {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+.procard-badge.dispo {
+  background: #e6fbe6;
+  color: #2e7d32;
+  border: 1px solid #b2dfdb;
+}
+.procard-badge.indispo {
+  background: #ffeaea;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+.procard-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.97rem;
+  margin-bottom: 2px;
+}
+.procard-icn {
+  font-size: 1.1em;
+}
+.procard-metier {
+  color: #4a5568;
+  font-weight: 500;
+}
+.procard-ville {
+  color: #1976d2;
+  font-weight: 500;
+}
+.procard-stars {
+  font-size: 1.1em;
+  margin-right: 2px;
+}
+.procard-note {
+  color: #ff9800;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.procard-tarif {
+  color: #388e3c;
+  font-weight: 500;
+  margin-left: 6px;
+}
+.procard-tel {
+  color: #1976d2;
+  font-weight: 500;
+  text-decoration: none;
+  margin-right: 4px;
+}
+.procard-tel:hover {
+  text-decoration: underline;
+}
+.procard-wa {
+  background: none;
+  border: none;
+  margin-left: 2px;
+  margin-right: 6px;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.procard-wa svg {
+  vertical-align: middle;
+}
+.procard-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 2px 12px;
+  font-size: 0.95em;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.procard-btn:hover {
+  background: #125ea2;
+} 

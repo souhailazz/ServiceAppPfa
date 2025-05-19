@@ -11,6 +11,7 @@ public class QueryResult
     public string action { get; set; }
     public Intent intent { get; set; }
     public Dictionary<string, JsonElement> parameters { get; set; }
+    public string fulfillmentText { get; set; }
 }
 
 public class Intent
